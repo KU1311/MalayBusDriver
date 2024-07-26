@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub CSV/Table Update</title>
+</head>
+<body>
+  <h1>GitHub CSV/Table Update</h1>
+  <button onclick="updateData()">Update Data</button>
+
+  <script>
+    function updateData() {
+      const updatedCsvData = 'Name,Age\nJohn,30\nJane,25\nBob,40'; // Replace with your updated data
+
+      fetch('/update-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: updatedCsvData })
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error updating data:', error);
+      });
+    }
+  </script>
+</body>
+</html>
