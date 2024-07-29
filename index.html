@@ -1,31 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GitHub CSV/Table Update</title>
+  <title>Google Sheets Form</title>
+  <style>
+    /* Add any necessary CSS styles here */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>GitHub CSV/Table Update</h1>
-  <button onclick="updateData()">Update Data</button>
+  <h1>Submit to Google Sheets</h1>
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbzOc90Su0hgwxN7tKC5IRmU0kFr6K38uQcZkxQfY6sMuGAcTyVPuIuCcEI9j1y961YAKw/exec">
+    <input name="Email" type="email" placeholder="Email" required>
+    <input name="Name" type="text" placeholder="Name" required>
+    <button type="submit">Send</button>
+  </form>
 
   <script>
-    function updateData() {
-      const updatedCsvData = 'Name,Age\nJohn,30\nJane,25\nBob,40'; // Replace with your updated data
+    // Add any necessary JavaScript code here
+    // For example, you can add event listeners to the form
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting directly
+      
+      // Retrieve the form data
+      var formData = {
+        Email: document.querySelector('input[name="Email"]').value,
+        Name: document.querySelector('input[name="Name"]').value
+      };
 
-      fetch('/update-data', {
+      // Send the form data to the Google Sheets web app
+      fetch('https://script.google.com/macros/s/AKfycbzOc90Su0hgwxN7tKC5IRmU0kFr6K38uQcZkxQfY6sMuGAcTyVPuIuCcEI9j1y961YAKw/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ data: updatedCsvData })
+        body: JSON.stringify(formData)
       })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
+      .then(function(response) {
+        if (response.ok) {
+          alert('Form submitted successfully!');
+        } else {
+          alert('Error submitting the form. Please try again later.');
+        }
       })
-      .catch(error => {
-        console.error('Error updating data:', error);
+      .catch(function(error) {
+        alert('An error occurred: ' + error);
       });
-    }
+    });
   </script>
 </body>
 </html>
