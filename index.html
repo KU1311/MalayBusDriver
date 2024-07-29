@@ -29,18 +29,17 @@
 </head>
 <body>
   <h1>Submit to Google Sheets</h1>
-  <form method="POST" action="https://script.google.com/macros/s/AKfycbzOc90Su0hgwxN7tKC5IRmU0kFr6K38uQcZkxQfY6sMuGAcTyVPuIuCcEI9j1y961YAKw/exec">
+  <form id="myForm" method="POST" action="YOUR_WEBAPP_URL">
     <input name="Email" type="email" placeholder="Email" required>
     <input name="Name" type="text" placeholder="Name" required>
     <button type="submit">Send</button>
   </form>
 
   <script>
-    // Add any necessary JavaScript code here
-    // For example, you can add event listeners to the form
-    document.querySelector('form').addEventListener('submit', function(event) {
+    // Add event listener to the form
+    document.getElementById('myForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent the form from submitting directly
-      
+
       // Retrieve the form data
       var formData = {
         Email: document.querySelector('input[name="Email"]').value,
@@ -48,7 +47,7 @@
       };
 
       // Send the form data to the Google Sheets web app
-      fetch('https://script.google.com/macros/s/AKfycbzOc90Su0hgwxN7tKC5IRmU0kFr6K38uQcZkxQfY6sMuGAcTyVPuIuCcEI9j1y961YAKw/exec', {
+      fetch('YOUR_WEBAPP_URL', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
