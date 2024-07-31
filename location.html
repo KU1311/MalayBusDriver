@@ -32,11 +32,11 @@
       navigator.geolocation.getCurrentPosition(
 
           // Get the latitude and longitude
-          var currentX = position.coords.latitude;
-          var currentY = position.coords.longitude;
+          const currentX = position.coords.latitude;
+          const currentY = position.coords.longitude;
 
           // Update the location display
-          var locationDisplay = document.getElementById("location");
+          const locationDisplay = document.getElementById("location");
           locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
 
       );
