@@ -27,6 +27,8 @@
   <div id="location">Loading...</div>
 	<button id="submitbtn">SUBMIT</button>
 <script type="module">
+	let intervalId;
+	
     // Check if the browser supports the Geolocation API
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -64,7 +66,8 @@ const username = "Test Account"
 		formData.append('X',currentX);
 		formData.append('Y',currentY);
 		formData.append('last_update',currentDateTime);	
-			
+		
+		function updateAndSubmitForm() {	
 		  try {
 				console.log('Now submit to script');
 			// Submit the form and wait for the fetch request to complete
@@ -82,11 +85,14 @@ const username = "Test Account"
 				console.error('Error submitting form:', error);
 				// Handle the error, e.g., display an error message to the user
 			}	
-			
+		}
 		
 		// -----------------------------------------
 		
-		
+		// Start the interval
+		intervalId = setInterval(updateAndSubmitForm, 60000); // 60000 milliseconds = 1 minute
+		// Submit the form
+		updateAndSubmitForm();
 
 	})  // button listener end
 		  
