@@ -1,60 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML to Sheets</title>
-       <script src="https://cdn.tailwindcss.com" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Login</title>
+  <style>
+    /* Rectangle 1 */
+    body {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: rgb(94, 80, 236);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      background-color: rgb(74, 57, 242 );
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-        <div class="flex items-center h-screen w-full bg-orange-100">
-      <div class="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
-        <h1 class="block w-full text-center text-grey-darkest mb-6">Feedback</h1>
+  <div class="login-container">
+    <h1>Hello Driver, please log in</h1>
+    <form action="booking.html" method="get">
+	  <div class="form-group">
+		<input type="text" name="username" placeholder="Username" required>
+	  </div>
+	  <div class="form-group">
+		<input type="tel" id="phone" name="phone" placeholder="Phone" required>
+	  </div>
+	  <button type="submit">Login</button>
+	</form>
 
-        <form class="mb-4 flex flex-wrap justify-between" id="form">
-  
-       
-          <div class="flex flex-col w-full mb-4">
-            <label class="field-label" for="email">Name</label>
-            <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="Name" id="email">
-          </div>
-          <div class="flex flex-col w-full mb-4">
-            <label class="field-label" for="password">Message</label>
-            <textarea class="bg-green-100 px-2 py-1 outline-none" type="text" name="Message" id="Message"></textarea>
-          </div>
-
-
-          <input type="date" name="Time" id="">
-          <input type="checkbox" name="Check" value="true" id="">
-          <button class="bg-orange-300 px-3 py-1 text-white mx-auto" type="submit" id="submit">Submit</button>
-        </form>
-    </div>
   </div>
-
 </body>
+</html>
 
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzOc90Su0hgwxN7tKC5IRmU0kFr6K38uQcZkxQfY6sMuGAcTyVPuIuCcEI9j1y961YAKw/exec'
-    const form = document.querySelector('#form')
-    const btn = document.querySelector('#submit')
+  const phoneInput = document.getElementById('phone');
 
-
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      btn.disabled = true
-      btn.innerHTML = "Loading..."
-
-      console.log(form)
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => { 
-              btn.disabled = false
-      btn.innerHTML = "Submit"
-            alert('Success!', response) })
-        .catch(error => {
-                     btn.disabled = false
-      btn.innerHTML = "Submit"
-            alert('Error!', error.message)})
-    })
+  phoneInput.addEventListener('input', function() {
+    // Remove any non-numeric characters from the input
+    this.value = this.value.replace(/\D/g, '');
+  });
 </script>
-</html>
