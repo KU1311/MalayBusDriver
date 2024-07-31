@@ -30,7 +30,7 @@
     // Check if the browser supports the Geolocation API
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        function(position) {
+
           // Get the latitude and longitude
           var currentX = position.coords.latitude;
           var currentY = position.coords.longitude;
@@ -38,12 +38,7 @@
           // Update the location display
           var locationDisplay = document.getElementById("location");
           locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
-        },
-        function(error) {
-          // Handle any errors that occur
-          var locationDisplay = document.getElementById("location");
-          locationDisplay.textContent = "Error: " + error.message;
-        }
+
       );
 	  
 	  const submitButton = document.getElementById('submitbtn');
