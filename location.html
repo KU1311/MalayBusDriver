@@ -45,9 +45,9 @@
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 		const form = document.querySelector('#form');
 		const btn = document.querySelector('#submitbtn');
-				
+		const username = "Test Account"
 		const formData = new FormData();
-		//formData.append('username', username);
+		formData.append('Driver', username);
 		//formData.append('date', formattedDate);
 		//formData.append('time', selectedTime); 
 		formData.append('X',currentX);
