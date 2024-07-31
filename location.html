@@ -30,18 +30,16 @@
     // Check if the browser supports the Geolocation API
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-
+        function(position) {
           // Get the latitude and longitude
-          const currentX = position.coords.latitude;
-          const currentY = position.coords.longitude;
+          var currentX = position.coords.latitude;
+          var currentY = position.coords.longitude;
 
           // Update the location display
-          const locationDisplay = document.getElementById("location");
+          var locationDisplay = document.getElementById("location");
           locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
-
-      );
-	  
-	  const submitButton = document.getElementById('submitbtn');
+		  
+		  const submitButton = document.getElementById('submitbtn');
 	  submitButton.addEventListener('click', function() {
 	  
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
@@ -80,7 +78,15 @@
 		
 
 	})  // button listener end
-	  
+		  
+		  
+        },
+        function(error) {
+          // Handle any errors that occur
+          var locationDisplay = document.getElementById("location");
+          locationDisplay.textContent = "Error: " + error.message;
+        }
+      );
 	  
 	  
     } else {
