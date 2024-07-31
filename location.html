@@ -30,7 +30,7 @@
 	let intervalId;
 	
     // Check if the browser supports the Geolocation API
-	function upload_loc(){
+	function upload_loc {
 		if (navigator.geolocation) {
 		  navigator.geolocation.getCurrentPosition(
 			function(position) {
@@ -43,7 +43,7 @@
 			  locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
 			  
 			  const submitButton = document.getElementById('submitbtn');
-		  submitButton.addEventListener('click', function() {
+		  
 		  
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
@@ -91,9 +91,7 @@
 			// -----------------------------------------
 			
 			
-
-		})  // button listener end
-			  
+		  
 			  
 			},
 			function(error) {
@@ -110,7 +108,7 @@
 		  locationDisplay.textContent = "Geolocation is not supported by this browser.";
 		}
 	}
-	upload_loc();
+	
 	// Start the interval immediately when the page loads
 	window.addEventListener('load', function() {
 	  intervalId = setInterval(upload_loc, 30000); // 60000 milliseconds = 1 minute
