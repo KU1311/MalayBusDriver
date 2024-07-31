@@ -25,7 +25,7 @@
 </head>
 <body>
   <div id="location">Loading...</div>
-	<button id="submit">SUBMIT</button>
+	<button id="submitbtn">SUBMIT</button>
 <script type="module">
     // Check if the browser supports the Geolocation API
     if (navigator.geolocation) {
@@ -52,8 +52,8 @@
     }
 	
 	
-	const bookButton = document.getElementById('book-button');
-	  bookButton.addEventListener('click', function() {
+	const submitButton = document.getElementById('submitbtn');
+	  submitButton.addEventListener('click', function() {
 	  
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 		const form = document.querySelector('#form');
