@@ -45,14 +45,8 @@
           locationDisplay.textContent = "Error: " + error.message;
         }
       );
-    } else {
-      // The browser does not support the Geolocation API
-      var locationDisplay = document.getElementById("location");
-      locationDisplay.textContent = "Geolocation is not supported by this browser.";
-    }
-	
-	
-	const submitButton = document.getElementById('submitbtn');
+	  
+	  const submitButton = document.getElementById('submitbtn');
 	  submitButton.addEventListener('click', function() {
 	  
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
@@ -91,6 +85,17 @@
 		
 
 	})  // button listener end
+	  
+	  
+	  
+    } else {
+      // The browser does not support the Geolocation API
+      var locationDisplay = document.getElementById("location");
+      locationDisplay.textContent = "Geolocation is not supported by this browser.";
+    }
+	
+	
+	
 	
   </script>
 </body>
