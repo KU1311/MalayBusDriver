@@ -74,8 +74,10 @@
 				// Submit the form and wait for the fetch request to complete
 				 fetch(scriptURL, { method: 'POST', body: formData })
 					.then(response => {
+						console.log('SUCCESS');
 					})
 					.catch(error => {
+						console.log('ERROR');
 					});
 				// Redirect to next page
 				//window.location.href = `boarding.html?${queryParams.toString()}`;
