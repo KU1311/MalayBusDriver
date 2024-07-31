@@ -30,89 +30,91 @@
 	let intervalId;
 	
     // Check if the browser supports the Geolocation API
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function(position) {
-          // Get the latitude and longitude
-          var currentX = position.coords.latitude;
-          var currentY = position.coords.longitude;
+	function upload_loc {
+		if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(
+			function(position) {
+			  // Get the latitude and longitude
+			  var currentX = position.coords.latitude;
+			  var currentY = position.coords.longitude;
 
-          // Update the location display
-          var locationDisplay = document.getElementById("location");
-          locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
+			  // Update the location display
+			  var locationDisplay = document.getElementById("location");
+			  locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
+			  
+			  const submitButton = document.getElementById('submitbtn');
+		  submitButton.addEventListener('click', function() {
 		  
-		  const submitButton = document.getElementById('submitbtn');
-	  submitButton.addEventListener('click', function() {
-	  
-		const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
-		
-		const form = document.querySelector('#form');
-		const btn = document.querySelector('#submitbtn');
-const username = "Test Account"
-		// Get the current date and time
-		const currentDateTime = new Date().toLocaleString("en-US", {
-			timeZone: "Asia/Shanghai",
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-			hour: "2-digit",
-			minute: "2-digit",
-			second: "2-digit"
-		  });
-		const formData = new FormData();
-		formData.append('username', username);
-		//formData.append('date', formattedDate);
-		//formData.append('time', selectedTime); 
-		formData.append('X',currentX);
-		formData.append('Y',currentY);
-		formData.append('last_update',currentDateTime);	
-		
-		function updateAndSubmitForm() {	
-		  try {
-				console.log('Now submit to script');
-			// Submit the form and wait for the fetch request to complete
-			 fetch(scriptURL, { method: 'POST', body: formData })
-				.then(response => {
-				  alert('Success!', response);	
-				})
-				.catch(error => {
-				  alert('Error!', error.message);
-				});
-			// Redirect to next page
-			//window.location.href = `boarding.html?${queryParams.toString()}`;
-				
-			} catch (error) {
-				console.error('Error submitting form:', error);
-				// Handle the error, e.g., display an error message to the user
-			}	
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
+			
+			const form = document.querySelector('#form');
+			const btn = document.querySelector('#submitbtn');
+		const username = "Test Account"
+			// Get the current date and time
+			const currentDateTime = new Date().toLocaleString("en-US", {
+				timeZone: "Asia/Shanghai",
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit"
+			  });
+			const formData = new FormData();
+			formData.append('username', username);
+			//formData.append('date', formattedDate);
+			//formData.append('time', selectedTime); 
+			formData.append('X',currentX);
+			formData.append('Y',currentY);
+			formData.append('last_update',currentDateTime);	
+			
+			
+			  try {
+					console.log('Now submit to script');
+				// Submit the form and wait for the fetch request to complete
+				 fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+					  alert('Success!', response);	
+					})
+					.catch(error => {
+					  alert('Error!', error.message);
+					});
+				// Redirect to next page
+				//window.location.href = `boarding.html?${queryParams.toString()}`;
+					
+				} catch (error) {
+					console.error('Error submitting form:', error);
+					// Handle the error, e.g., display an error message to the user
+				}	
+			
+			
+			// -----------------------------------------
+			
+			
+
+		})  // button listener end
+			  
+			  
+			},
+			function(error) {
+			  // Handle any errors that occur
+			  var locationDisplay = document.getElementById("location");
+			  locationDisplay.textContent = "Error: " + error.message;
+			}
+		  );
+		  
+		  
+		} else {
+		  // The browser does not support the Geolocation API
+		  var locationDisplay = document.getElementById("location");
+		  locationDisplay.textContent = "Geolocation is not supported by this browser.";
 		}
-		
-		// -----------------------------------------
-		
-		// Start the interval
-		intervalId = setInterval(updateAndSubmitForm, 60000); // 60000 milliseconds = 1 minute
-		// Submit the form
-		updateAndSubmitForm();
-
-	})  // button listener end
-		  
-		  
-        },
-        function(error) {
-          // Handle any errors that occur
-          var locationDisplay = document.getElementById("location");
-          locationDisplay.textContent = "Error: " + error.message;
-        }
-      );
-	  
-	  
-    } else {
-      // The browser does not support the Geolocation API
-      var locationDisplay = document.getElementById("location");
-      locationDisplay.textContent = "Geolocation is not supported by this browser.";
-    }
+	}
 	
-	
+	// Start the interval immediately when the page loads
+	window.addEventListener('load', function() {
+	  intervalId = setInterval(upload_loc, 30000); // 60000 milliseconds = 1 minute
+	});
 	
 	
   </script>
