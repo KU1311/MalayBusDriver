@@ -109,7 +109,7 @@
       const queryParams = new URLSearchParams({
         username: username,
 		phone: phone,
-        id: id,
+        id: routeid,
         time: time,
         // Include any other relevant parameters here
       });
@@ -135,13 +135,13 @@
 		
 
 	  // Populate the initial dropoff location options
-	  //populateTimeOptions();
+	  populateTimeOptions();
 	}
 }
 	function populateTimeOptions() {
 
 	  // Clear the existing dropoff options
-	  //timeSelect.innerHTML = '';
+	  timeSelect.innerHTML = '';
 
 	  // Get the selected pickup location
 	  const selectedRoute = routeSelect.value;
