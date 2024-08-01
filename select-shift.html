@@ -105,13 +105,13 @@
 
       const route = document.getElementById('route').value;
       const time = document.getElementById('time').value;
-
+	  const date = new Date()  // current date
       const queryParams = new URLSearchParams({
         username: username,
 		phone: phone,
         id: route,
-        time: time,
-        // Include any other relevant parameters here
+		date: date,
+        time: time
       });
 
       window.location.href = `work.html?${queryParams.toString()}`;
