@@ -76,6 +76,11 @@
  <script type="module">
     import { getRoutes } from './routes.js';
     const routes = await getRoutes();
+	const routeSelect = document.getElementById('route');
+	const timeSelect = document.getElementById('time');
+
+	// Clear the existing dropoff options
+	timeSelect.innerHTML = '';
 	
     // Retrieve the username from the query parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -89,7 +94,7 @@
     populateRouteOptions();
 
     // Update the dropoff location options based on the selected pickup location
-    document.getElementById('pickup-location').addEventListener('change', () => {
+    document.getElementById('time').addEventListener('change', () => {
       populateTimeOptions();
     });
 
@@ -134,8 +139,6 @@
 	}
 
 	function populateTimeOptions() {
-	  const routeSelect = document.getElementById('route');
-      const timeSelect = document.getElementById('time');
 
 	  // Clear the existing dropoff options
 	  timeSelect.innerHTML = '';
