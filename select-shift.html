@@ -94,7 +94,7 @@
     populateRouteOptions();
 
     // Update the dropoff location options based on the selected pickup location
-    document.getElementById('time').addEventListener('change', () => {
+    document.getElementById('route').addEventListener('change', () => {
       populateTimeOptions();
     });
 
@@ -141,7 +141,7 @@
 	function populateTimeOptions() {
 
 	  // Clear the existing dropoff options
-	  timeSelect.innerHTML = '';
+	  //timeSelect.innerHTML = '';
 
 	  // Get the selected pickup location
 	  const selectedRoute = routeSelect.value;
