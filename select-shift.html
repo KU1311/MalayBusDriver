@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Shuttle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: rgb(94, 80, 236);
+    }
+
+    .booking-container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: rgb(74, 57, 242 );
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <div class="booking-container">
+    <h1>Hello <span id="username"></span>, Select your shift</h1>
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="route">Route:</label>
+        <select id="route" required></select>
+      </div>
+      <div class="form-group">
+        <label for="time">Departure Time:</label>
+        <select id="time" required></select>
+      </div>
+      
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+ <script type="module">
+    import { getRoutes } from './routes.js';
+    const routes = await getRoutes();
+	
+    // Retrieve the username from the query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+	const phone = urlParams.get('phone');
+
+    // Display the username on the page
+    document.getElementById('username').textContent = username;
+
+    const pairs = generatePickupDropoffPairs(routes);
+    console.log(pairs);
+	
+    // Populate the pickup and dropoff location options
+    populateLocationOptions();
+
+    // Update the dropoff location options based on the selected pickup location
+    document.getElementById('pickup-location').addEventListener('change', () => {
+      populateDropoffOptions();
+    });
+
+    // Handle the form submission
+    const bookingForm = document.getElementById('booking-form');
+    bookingForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const route = document.getElementById('route').value;
+      const time = document.getElementById('time').value;
+
+      const queryParams = new URLSearchParams({
+        username: username,
+		phone: phone,
+        id: id,
+        time: time,
+        // Include any other relevant parameters here
+      });
+
+      window.location.href = `work.html?${queryParams.toString()}`;
+    });
+	
+	
+
+	
+	function populateLocationOptions() {
+		
+		
+      const routeSelect = document.getElementById('route');
+      const timeSelect = document.getElementById('time');
+		
+		for (const route of routes) {
+			const routeid = route.id
+			const routeOption = document.createElement('option');
+			routeOption.value = routeid;
+			routeOption.textContent = routeid;
+			routeSelect.add(routeOption);
+		
+
+	  // Populate the initial dropoff location options
+	  populateDropoffOptions();
+	}
+
+	function populateDropoffOptions() {
+	  const routeSelect = document.getElementById('route');
+      const timeSelect = document.getElementById('time');
+
+	  // Clear the existing dropoff options
+	  timeSelect.innerHTML = '';
+
+	  // Get the selected pickup location
+	  const selectedRoute = routeSelect.value;
+
+	  
+	  // Add the dropoff options to the select element
+	  for (const route of routes) {
+		  if (route.id === selectedRoute) {
+			matchedDepartureTimes = route.DepartureTime.map(time => time.trim());
+			matchedDepartureTimes.forEach(time => {
+			const option = document.createElement('option');
+			option.value = time;
+			option.text = time;
+			timeSelect.add(option);
+        });
+			
+		  });
+		  }
+		});
+	}
+  </script>
+</body>
+</html>
