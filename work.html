@@ -89,7 +89,18 @@
 	  <h3 id="route">ROUTE</h3>
 	  </div>
 	</div>
-	
+
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const prouteId = urlParams.get('id');
+	const routeElement = document.getElementById('route');
+
+	// Display pick up and dropoff 
+	routeElement.textContent = prouteId || 'N/A';
+
+</script>	
 <script type="module">
 	let intervalId;
 	
@@ -102,13 +113,6 @@
 			  var currentX = position.coords.latitude;
 			  var currentY = position.coords.longitude;
 
-			  // Update the location display
-			  var locationDisplay = document.getElementById("location");
-			  locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
-			  
-			  const submitButton = document.getElementById('submitbtn');
-		  
-		  
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
 			const form = document.querySelector('#form');
