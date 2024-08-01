@@ -96,6 +96,8 @@
     const username = urlParams.get('username');
     const prouteId = urlParams.get('id');
 	const routeElement = document.getElementById('route');
+	const date = urlParams.get('date');
+	const time = urlParams.get('time');
 
 	// Display pick up and dropoff 
 	routeElement.textContent = prouteId || 'N/A';
@@ -117,7 +119,6 @@
 			
 			const form = document.querySelector('#form');
 			const btn = document.querySelector('#submitbtn');
-		const username = "Test Account"
 			// Get the current date and time
 			const currentDateTime = new Date().toLocaleString("en-US", {
 				timeZone: "Asia/Shanghai",
@@ -130,11 +131,12 @@
 			  });
 			const formData = new FormData();
 			formData.append('username', username);
-			//formData.append('date', formattedDate);
-			//formData.append('time', selectedTime); 
+			formData.append('Route',prouteId);	
 			formData.append('X',currentX);
 			formData.append('Y',currentY);
 			formData.append('last_update',currentDateTime);	
+			formData.append('Date',date);	
+			formData.append('Time',time);	
 			
 			
 			  try {
