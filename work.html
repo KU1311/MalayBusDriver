@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Shuttle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: rgb(94, 80, 236);
+
+    .search-results-container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: rgb(74, 57, 242 );
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+	
+	#search-info-container {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 10px;
+	}
+
+	.search-info-item {
+	  display: flex;
+	  align-items: center;
+	  font-size: 48px;
+	  font-weight: bold;
+	  color: rgb(30, 110, 233);
+	}
+
+	.search-info-item label {
+	  font-weight: bold;
+	  color: black
+	}
+	table {
+	  margin: 0 auto;
+	  text-align: left;
+
+	th, td {
+	  padding: 8px;	
+	  text-align: left;
+	  border-bottom: 1px solid #ddd;
+	}
+  </style>
+</head>
+<body>
+  <div class="search-results-container">
+	<div id="search-info-container">
+	  <div class="search-info-item">
+	  <h3 id="route">ROUTE</h3>
+	  </div>
+	</div>
+	
+<script type="module">
+	let intervalId;
+	
+    // Check if the browser supports the Geolocation API
+	function upload_loc(){
+		if (navigator.geolocation) {
+		  navigator.geolocation.getCurrentPosition(
+			function(position) {
+			  // Get the latitude and longitude
+			  var currentX = position.coords.latitude;
+			  var currentY = position.coords.longitude;
+
+			  // Update the location display
+			  var locationDisplay = document.getElementById("location");
+			  locationDisplay.textContent = "Latitude: " + currentX + ", Longitude: " + currentY;
+			  
+			  const submitButton = document.getElementById('submitbtn');
+		  
+		  
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
+			
+			const form = document.querySelector('#form');
+			const btn = document.querySelector('#submitbtn');
+		const username = "Test Account"
+			// Get the current date and time
+			const currentDateTime = new Date().toLocaleString("en-US", {
+				timeZone: "Asia/Shanghai",
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit"
+			  });
+			const formData = new FormData();
+			formData.append('username', username);
+			//formData.append('date', formattedDate);
+			//formData.append('time', selectedTime); 
+			formData.append('X',currentX);
+			formData.append('Y',currentY);
+			formData.append('last_update',currentDateTime);	
+			
+			
+			  try {
+					console.log('Now submit to script');
+				// Submit the form and wait for the fetch request to complete
+				 fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+						console.log('SUCCESS');
+					})
+					.catch(error => {
+						console.log('ERROR');
+					});
+				// Redirect to next page
+				//window.location.href = `boarding.html?${queryParams.toString()}`;
+					
+				} catch (error) {
+					console.error('Error submitting form:', error);
+					// Handle the error, e.g., display an error message to the user
+				}	
+			
+			
+			// -----------------------------------------
+			
+			
+		  
+			  
+			},
+			function(error) {
+			  // Handle any errors that occur
+			  var locationDisplay = document.getElementById("location");
+			  locationDisplay.textContent = "Error: " + error.message;
+			}
+		  );
+		  
+		  
+		} else {
+		  // The browser does not support the Geolocation API
+		  var locationDisplay = document.getElementById("location");
+		  locationDisplay.textContent = "Geolocation is not supported by this browser.";
+		}
+	}
+	
+	// Start the interval immediately when the page loads
+	window.addEventListener('load', function() {
+	  intervalId = setInterval(upload_loc, 30000); // 60000 milliseconds = 1 minute
+	});
+	
+	
+  </script>
+
+</body>
+</html>
