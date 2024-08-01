@@ -117,26 +117,35 @@
 
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
-			const form = document.querySelector('#form');
-			const btn = document.querySelector('#submitbtn');
-			// Get the current date and time
-			const currentDateTime = new Date().toLocaleString("en-US", {
-				timeZone: "Asia/Shanghai",
-				year: "numeric",
-				month: "2-digit",
-				day: "2-digit",
-				hour: "2-digit",
-				minute: "2-digit",
-				second: "2-digit"
-			  });
-			const formData = new FormData();
-			formData.append('username', username);
-			formData.append('Route',prouteId);	
-			formData.append('X',currentX);
-			formData.append('Y',currentY);
-			formData.append('last_update',currentDateTime);	
-			formData.append('Date',date);	
-			formData.append('Time',time);	
+			fetch(scriptURL), {method: 'GET'})
+			.then(response => response.json())
+			.then(data => {
+			  // Find the row index that matches the current username
+			  const matchingRow = data.find(row => row.username === username);
+			  
+			  if (matchingRow) {
+				  const rowIndex = matchingRow.rowIndex;
+				  const formData = new FormData();
+			  
+					// Get the current date and time
+					const currentDateTime = new Date().toLocaleString("en-US", {
+					timeZone: "Asia/Shanghai",
+					year: "numeric",
+					month: "2-digit",
+					day: "2-digit",
+					hour: "2-digit",
+					minute: "2-digit",
+					second: "2-digit"
+				  });
+				const formData = new FormData();
+				formData.append('username', username);
+				formData.append('Route',prouteId);	
+				formData.append('X',currentX);
+				formData.append('Y',currentY);
+				formData.append('last_update',currentDateTime);	
+				formData.append('Date',date);	
+				formData.append('Time',time);	
+				formData.append('rowIndex', rowIndex);
 			
 			
 			  try {
@@ -156,7 +165,28 @@
 					console.error('Error submitting form:', error);
 					// Handle the error, e.g., display an error message to the user
 				}	
-			
+			} else {
+				// Step 3: Append a new row if no matching row is found
+				const formData = new FormData();
+				formData.append('username', username);
+				formData.append('Route', prouteId);
+				formData.append('X', currentX);
+				formData.append('Y', currentY);
+				formData.append('last_update', currentDateTime);
+				formData.append('Date', date);
+				formData.append('Time', time);
+
+				fetch(scriptURL, {
+				  method: 'POST',
+				  body: formData
+				})
+				.then(response => {
+				  console.log('New row added successfully!');
+				})
+				.catch(error => {
+				  console.error('Error adding new row:', error);
+				});
+			  }
 			
 			// -----------------------------------------
 			
