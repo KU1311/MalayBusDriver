@@ -89,11 +89,11 @@
     console.log(pairs);
 	
     // Populate the pickup and dropoff location options
-    populateLocationOptions();
+    populateRouteOptions();
 
     // Update the dropoff location options based on the selected pickup location
     document.getElementById('pickup-location').addEventListener('change', () => {
-      populateDropoffOptions();
+      populateTimeOptions();
     });
 
     // Handle the form submission
@@ -118,7 +118,7 @@
 	
 
 	
-	function populateLocationOptions() {
+	function populateRouteOptions() {
 		
 		
       const routeSelect = document.getElementById('route');
@@ -133,10 +133,10 @@
 		
 
 	  // Populate the initial dropoff location options
-	  populateDropoffOptions();
+	  populateTimeOptions();
 	}
 
-	function populateDropoffOptions() {
+	function populateTimeOptions() {
 	  const routeSelect = document.getElementById('route');
       const timeSelect = document.getElementById('time');
 
@@ -152,16 +152,17 @@
 		  if (route.id === selectedRoute) {
 			matchedDepartureTimes = route.DepartureTime.map(time => time.trim());
 			matchedDepartureTimes.forEach(time => {
-			const option = document.createElement('option');
-			option.value = time;
-			option.text = time;
-			timeSelect.add(option);
-        });
+				const option = document.createElement('option');
+				option.value = time;
+				option.text = time;
+				timeSelect.add(option);
+			});
 			
-		  });
 		  }
-		});
+		}
 	}
-  </script>
+	}
+
+</script>
 </body>
 </html>
