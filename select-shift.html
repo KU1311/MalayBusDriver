@@ -78,7 +78,7 @@
     const routes = await getRoutes();
 	const routeSelect = document.getElementById('route');
 	const timeSelect = document.getElementById('time');
-
+	
 	// Clear the existing dropoff options
 	timeSelect.innerHTML = '';
 	
@@ -109,7 +109,7 @@
       const queryParams = new URLSearchParams({
         username: username,
 		phone: phone,
-        id: routeid,
+        id: route,
         time: time,
         // Include any other relevant parameters here
       });
