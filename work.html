@@ -117,7 +117,7 @@
 
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
-			fetch(scriptURL), {method: 'GET'})
+			fetch(scriptURL), {method: 'GET'}
 			.then(response => response.json())
 			.then(data => {
 			  // Find the row index that matches the current username
@@ -200,7 +200,7 @@
 			  locationDisplay.textContent = "Error: " + error.message;
 			}
 		  );
-		  
+		 ); 
 		  
 		} else {
 		  // The browser does not support the Geolocation API
