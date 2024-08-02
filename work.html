@@ -145,6 +145,7 @@
 			      // Send the updated data back to the Google Sheet
 			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			      fetch(updateUrl, {
+			        mode: 'no-cors',
 				method: 'POST',
 				headers: {
 				  'Content-Type': 'application/json'
