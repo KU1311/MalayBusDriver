@@ -158,9 +158,10 @@
 			    if (matchingRowIndex !== -1) {
 				    // ----- Found Existing Record ------
 			    //matchingRowIndex = matchingRowIndex + 1; // +1 to match with the real row number
-				    
+
+
 			    console.log("matched row index ",matchingRowIndex)
-			      formData.append('row', matchingRowIndex)
+			      formData.append('rowNumber', matchingRowIndex)
 			      fetch(scriptURL, { method: 'POST', body: formData })
 					.then(response => {
 						console.log('SUCCESS');
