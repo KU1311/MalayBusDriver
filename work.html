@@ -105,8 +105,7 @@
 </script>	
 <script type="module">
 	let intervalId;
-	window.googleDocCallback = function () { return true; };
-	
+
     // Check if the browser supports the Geolocation API
 	function upload_loc(){
 		if (navigator.geolocation) {
@@ -117,10 +116,11 @@
 			  var currentY = position.coords.longitude;
 
 			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
-			
+			console.log("lookup check")
 			fetch(sheetUrl)
 			  .then(response => response.text())
 			  .then(data => {
+			    console.log("lookup responsed")
 			    // Parse the CSV data
 			    const rows = data.trim().split('\n');
 			    const headers = rows[0].split(',');
@@ -133,6 +133,7 @@
 			    });
 			
 			    if (matchingRowIndex !== -1) {
+			    console.log("matched row index ",matchingRowIndex)
 			      // Update the X and Y values in the matching row
 			      const updatedRow = dataRows[matchingRowIndex].split(',');
 			      updatedRow[headers.indexOf('X')] = currentX;
@@ -144,7 +145,7 @@
 			      const updatedCsvData = updatedData.join('\n');
 			
 			      // Send the updated data back to the Google Sheet
-			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec?callback=googleDocCallback';
+			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			      fetch(updateUrl, {
 			        //mode: 'no-cors',
 				method: 'POST',
