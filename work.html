@@ -105,6 +105,7 @@
 </script>	
 <script type="module">
 	let intervalId;
+	window.googleDocCallback = function () { return true; };
 	
     // Check if the browser supports the Geolocation API
 	function upload_loc(){
@@ -143,7 +144,7 @@
 			      const updatedCsvData = updatedData.join('\n');
 			
 			      // Send the updated data back to the Google Sheet
-			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
+			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec?callback=googleDocCallback';
 			      fetch(updateUrl, {
 			        //mode: 'no-cors',
 				method: 'POST',
