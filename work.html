@@ -151,8 +151,58 @@
 			    console.error('Error:', error);
 			  });
 
-			console.log("Finished");
+			console.log("ok");
+				
+			// --------------------------------------------	
+				
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
+			const form = document.querySelector('#form');
+			const btn = document.querySelector('#submitbtn');
+			// Get the current date and time
+			const currentDateTime = new Date().toLocaleString("en-US", {
+				timeZone: "Asia/Shanghai",
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit"
+			  });
+			const formData = new FormData();
+			formData.append('username', username);
+			formData.append('Route',prouteId);	
+			formData.append('X',currentX);
+			formData.append('Y',currentY);
+			formData.append('last_update',currentDateTime);	
+			formData.append('Date',date);	
+			formData.append('Time',time);	
+			
+			
+			  try {
+					console.log('Now submit to script');
+				// Submit the form and wait for the fetch request to complete
+				 fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+						console.log('SUCCESS');
+					})
+					.catch(error => {
+						console.log('ERROR');
+					});
+				// Redirect to next page
+				//window.location.href = `boarding.html?${queryParams.toString()}`;
+					
+				} catch (error) {
+					console.error('Error submitting form:', error);
+					// Handle the error, e.g., display an error message to the user
+				}	
+			
+			
+			// -----------------------------------------
+
+
+
+				
 		}) // end of function
 	  } else {
 	    console.error('navigator.geolocation Error:', error);
