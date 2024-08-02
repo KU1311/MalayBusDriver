@@ -145,63 +145,18 @@
 			      const updatedCsvData = updatedData.join('\n');
 			
 			      // Send the updated data back to the Google Sheet
-			      const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
-			
-			// Get the current date and time
-			const currentDateTime = new Date().toLocaleString("en-US", {
-				timeZone: "Asia/Shanghai",
-				year: "numeric",
-				month: "2-digit",
-				day: "2-digit",
-				hour: "2-digit",
-				minute: "2-digit",
-				second: "2-digit"
+			    }
+			  } 
+			  .catch(error => {
+			    console.error('Error:', error);
 			  });
-			const formData = new FormData();
-			formData.append('username', username);
-			formData.append('Route',prouteId);	
-			formData.append('X',currentX);
-			formData.append('Y',currentY);
-			formData.append('last_update',currentDateTime);	
-			formData.append('Date',date);	
-			formData.append('Time',time);	
-			
-			
-			  try {
-					console.log('Now submit to script');
-				// Submit the form and wait for the fetch request to complete
-				 fetch(scriptURL, { method: 'POST', body: formData })
-					.then(response => {
-						console.log('SUCCESS');
-					})
-					.catch(error => {
-						console.log('ERROR');
-					});
-				// Redirect to next page
-				//window.location.href = `boarding.html?${queryParams.toString()}`;
-					
-				} catch (error) {
-					console.error('Error submitting form:', error);
-					// Handle the error, e.g., display an error message to the user
-				}	
-			
-			
-			// -----------------------------------------
-			
-			
-		  
-			  
-			}
 
-		  }
-		}
-		  
-		} else {
-		  // The browser does not support the Geolocation API
-		  var locationDisplay = document.getElementById("location");
-		  locationDisplay.textContent = "Geolocation is not supported by this browser.";
-		}
-	}
+			console.log("Finished");
+			
+		} // end of function
+	  } else {
+	    console.error('navigator.geolocation Error:', error);
+	  }
 	
 	upload_loc()
 	// Start the interval immediately when the page loads
