@@ -128,14 +128,14 @@
 			    // Find the row index that matches the current username
 			    const matchingRowIndex = dataRows.findIndex(row => {
 			      const values = row.split(',');
-			      return values[headers.indexOf('RouteID')] === username;
+			      return values[headers.indexOf('username')] === username;
 			    });
 			
 			    if (matchingRowIndex !== -1) {
 			      // Update the X and Y values in the matching row
 			      const updatedRow = dataRows[matchingRowIndex].split(',');
-			      updatedRow[headers.indexOf('X')] = currentX.toString();
-			      updatedRow[headers.indexOf('Y')] = currentY.toString();
+			      updatedRow[headers.indexOf('X')] = currentX;
+			      updatedRow[headers.indexOf('Y')] = currentY;
 			      dataRows[matchingRowIndex] = updatedRow.join(',');
 			
 			      // Construct the updated CSV data
