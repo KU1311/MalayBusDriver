@@ -114,51 +114,8 @@
 			  // Get the latitude and longitude
 			  var currentX = position.coords.latitude;
 			  var currentY = position.coords.longitude;
-
-			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
-			console.log("lookup check")
-			fetch(sheetUrl)
-			  .then(response => response.text())
-			  .then(data => {
-			    console.log("lookup responsed")
-			    // Parse the CSV data
-			    const rows = data.trim().split('\n');
-			    const headers = rows[0].split(',');
-			    const dataRows = rows.slice(1);
-			
-			    // Find the row index that matches the current username
-			    const matchingRowIndex = dataRows.findIndex(row => {
-			      const values = row.split(',');
-			      return values[headers.indexOf('username')] === username;
-			    });
-			
-			    if (matchingRowIndex !== -1) {
-			    console.log("matched row index ",matchingRowIndex)
-			      // Update the X and Y values in the matching row
-			      const updatedRow = dataRows[matchingRowIndex].split(',');
-			      updatedRow[headers.indexOf('X')] = currentX;
-			      updatedRow[headers.indexOf('Y')] = currentY;
-			      dataRows[matchingRowIndex] = updatedRow.join(',');
-			
-			      // Construct the updated CSV data
-			      const updatedData = [headers.join(','), ...dataRows];
-			      const updatedCsvData = updatedData.join('\n');
-			
-			      // Send the updated data back to the Google Sheet
-			    }
-			  }) 
-			  .catch(error => {
-			    console.error('Error:', error);
-			  });
-
-			console.log("ok");
-				
-			// --------------------------------------------	
-				
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
-			const form = document.querySelector('#form');
-			const btn = document.querySelector('#submitbtn');
 			// Get the current date and time
 			const currentDateTime = new Date().toLocaleString("en-US", {
 				timeZone: "Asia/Shanghai",
@@ -177,6 +134,52 @@
 			formData.append('last_update',currentDateTime);	
 			formData.append('Date',date);	
 			formData.append('Time',time);	
+			
+
+			// ----- Check if have existing record
+				
+			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
+			console.log("lookup check")
+			fetch(sheetUrl)
+			  .then(response => response.text())
+			  .then(data => {
+			    console.log("lookup responsed")
+			    // Parse the CSV data
+			    const rows = data.trim().split('\n');
+			    const headers = rows[0].split(',');
+			    const dataRows = rows.slice(1);
+			
+			    // Find the row index that matches the current username
+			    const matchingRowIndex = dataRows.findIndex(row => {
+			      const values = row.split(',');
+			      return values[headers.indexOf('username')] === username;
+			    });
+			
+			    if (matchingRowIndex !== -1) {
+				    // ----- Found Existing Record ------
+			    matchingRowIndex+=1  // +1 to match with the real row number
+				    
+			    console.log("matched row index ",matchingRowIndex)
+			      formData.append('row', matchingRowIndex)
+			      fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+						console.log('SUCCESS');
+					})
+					.catch(error => {
+						console.log('ERROR');
+					});
+
+				    
+			    }
+			  }) 
+			  .catch(error => {
+			    console.error('Error:', error);
+			  });
+
+			console.log("ok");
+				
+			// --------------------------------------------	
+				
 			
 			
 			  try {
