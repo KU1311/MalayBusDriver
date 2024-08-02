@@ -117,7 +117,7 @@
 
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
 			
-			fetch(scriptURL), {method: 'GET'}
+			fetch(scriptURL, {method: 'GET'})
 			.then(response => response.json())
 			.then(data => {
 			  // Find the row index that matches the current username
@@ -137,7 +137,6 @@
 					minute: "2-digit",
 					second: "2-digit"
 				  });
-				const formData = new FormData();
 				formData.append('username', username);
 				formData.append('Route',prouteId);	
 				formData.append('X',currentX);
