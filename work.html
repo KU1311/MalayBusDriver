@@ -114,8 +114,8 @@
 			  // Get the latitude and longitude
 			  var currentX = position.coords.latitude;
 			  var currentY = position.coords.longitude;
-			const scriptURL = 'https://script.google.com/macros/s/AKfycbz46ZxZMpPJHDaqI_Eob5iJEiZzx4SWge0YjwG-rpOvLzFAULIrX-S9ZPW3779pftQ/exec';
-			
+			const scriptURLdel = 'https://script.google.com/macros/s/AKfycbz46ZxZMpPJHDaqI_Eob5iJEiZzx4SWge0YjwG-rpOvLzFAULIrX-S9ZPW3779pftQ/exec';  // delete
+			const scriptURL = 'https://script.google.com/macros/s/AKfycbwXkpL1GAIxaunjfgBai3ZRwHrOpDWrTYG-wHJMmBi-f0kXXHC86RInzJ8ydPayJ30/exec';  // append
 			// Get the current date and time
 			const currentDateTime = new Date().toLocaleString("en-US", {
 				timeZone: "Asia/Shanghai",
@@ -157,13 +157,13 @@
 			
 			    if (matchingRowIndex !== -1) {
 				    // ----- Found Existing Record ------
-			    	    
+			    	    // delete the old record
 				    
-				    //matchingRowIndex = matchingRowIndex + 1; // +1 to match with the real row number
+				    let NEWmatchingRowIndex = matchingRowIndex + 2; // +1 to match with the real row number
 
-				    console.log("matched row index ",matchingRowIndex)
-				      formData.append('rowIndex', matchingRowIndex)
-				      fetch(scriptURL, {
+				    console.log("matched row index ",NEWmatchingRowIndex)
+				      formData.append('rowIndex', NEWmatchingRowIndex)
+				      fetch(scriptURLdel, {
 					  method: 'POST',
 					  body: formData
 					})
@@ -179,33 +179,33 @@
 					});
 
 				    
-			    } else {
-					// --------------------------------------------	
+			    
+				// --------------------------------------------	
+				// Append new record	
+			
+			
+				try {
+					console.log('Now submit to script');
+				// Submit the form and wait for the fetch request to complete
+				 fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+						console.log('SUCCESS');
+					})
+					.catch(error => {
+						console.log('ERROR');
+					});
+				// Redirect to next page
+				//window.location.href = `boarding.html?${queryParams.toString()}`;
 					
-				
-				
-				  	try {
-						console.log('Now submit to script');
-					// Submit the form and wait for the fetch request to complete
-					 fetch(scriptURL, { method: 'POST', body: formData })
-						.then(response => {
-							console.log('SUCCESS');
-						})
-						.catch(error => {
-							console.log('ERROR');
-						});
-					// Redirect to next page
-					//window.location.href = `boarding.html?${queryParams.toString()}`;
-						
-					} catch (error) {
-						console.error('Error submitting form:', error);
-						// Handle the error, e.g., display an error message to the user
-					}	
-				
+				} catch (error) {
+					console.error('Error submitting form:', error);
+					// Handle the error, e.g., display an error message to the user
+				}	
+			
 			
 			// -----------------------------------------
 
-			    }
+			
 			  }) 
 			  .catch(error => {
 			    console.error('Error:', error);
