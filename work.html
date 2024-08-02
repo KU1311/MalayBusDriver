@@ -145,36 +145,52 @@
 			      const updatedCsvData = updatedData.join('\n');
 			
 			      // Send the updated data back to the Google Sheet
-			      const updateUrl = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
-			      fetch(updateUrl, {
-			        //mode: 'no-cors',
-				method: 'POST',
-				headers: {
-				  'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ data: updatedCsvData })
-			      })
-				.then(response => {
-				    if (!response.ok) {
-				        return response.text().then(text => {
-				          throw new Error(`HTTP error ${response.status}: ${text}`);
-				        });
-				      }
-				      return response.json();
-			        })
-				.then(result => {
-				  console.log('Google Sheet updated:', result);
-				})
-				.catch(error => {
-				  console.error('Error updating Google Sheet:', error);
-				});
-			    } else {
-			      console.log('No matching row found for username:', username);
-			    }
-			  })
-			  .catch(error => {
-			    console.error('Error:', error);
+			      const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Lz6t1rLExif7htW9hMaH12RoiDqE3zBNMNFcZsPDWhLxmZSKvXA4AGKaAU4ATFBZ/exec';
+			
+			const form = document.querySelector('#form');
+			const btn = document.querySelector('#submitbtn');
+			// Get the current date and time
+			const currentDateTime = new Date().toLocaleString("en-US", {
+				timeZone: "Asia/Shanghai",
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit"
 			  });
+			const formData = new FormData();
+			formData.append('username', username);
+			formData.append('Route',prouteId);	
+			formData.append('X',currentX);
+			formData.append('Y',currentY);
+			formData.append('last_update',currentDateTime);	
+			formData.append('Date',date);	
+			formData.append('Time',time);	
+			
+			
+			  try {
+					console.log('Now submit to script');
+				// Submit the form and wait for the fetch request to complete
+				 fetch(scriptURL, { method: 'POST', body: formData })
+					.then(response => {
+						console.log('SUCCESS');
+					})
+					.catch(error => {
+						console.log('ERROR');
+					});
+				// Redirect to next page
+				//window.location.href = `boarding.html?${queryParams.toString()}`;
+					
+				} catch (error) {
+					console.error('Error submitting form:', error);
+					// Handle the error, e.g., display an error message to the user
+				}	
+			
+			
+			// -----------------------------------------
+			
+			
 		  
 			  
 			},
@@ -184,6 +200,7 @@
 			  locationDisplay.textContent = "Error: " + error.message;
 			}
 		  );
+		  
 		  
 		} else {
 		  // The browser does not support the Geolocation API
