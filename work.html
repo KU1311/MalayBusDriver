@@ -150,7 +150,7 @@
 			    const dataRows = rows.slice(1);
 			    let matchingRowIndex = -1;
 			    // Find the row index that matches the current username
-			    const matchingRowIndex = dataRows.findIndex(row => {
+			    matchingRowIndex = dataRows.findIndex(row => {
 			      const values = row.split(',');
 			      return values[headers.indexOf('username')] === username;
 			    });
