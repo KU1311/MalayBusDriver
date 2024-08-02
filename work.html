@@ -157,7 +157,7 @@
 			
 			    if (matchingRowIndex !== -1) {
 				    // ----- Found Existing Record ------
-			    matchingRowIndex++;  // +1 to match with the real row number
+			    matchingRowIndex = matchingRowIndex + 1; // +1 to match with the real row number
 				    
 			    console.log("matched row index ",matchingRowIndex)
 			      formData.append('row', matchingRowIndex)
