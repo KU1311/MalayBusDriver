@@ -94,6 +94,7 @@
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
+    const busID = urlParams.get('busID');
     const prouteId = urlParams.get('id');
 	const routeElement = document.getElementById('route');
 	const date = urlParams.get('date');
@@ -132,6 +133,7 @@
 			const formattedDate = `${dateF.getFullYear()}/${(dateF.getMonth() + 1).toString().padStart(2, '0')}/${dateF.getDate().toString().padStart(2, '0')}`;
 			const formData = new FormData();
 			formData.append('username', username);
+			formData.append('busID', busID);
 			formData.append('Route',prouteId);	
 			formData.append('X',currentX);
 			formData.append('Y',currentY);
@@ -153,10 +155,10 @@
 			    const rows = data.trim().split('\n');
 			    const headers = rows[0].split(',');
 			    const dataRows = rows.slice(1);
-			    // Find the row index that matches the current username
+			    // Find the row index that matches the current busID
 			    matchedRowIndex = dataRows.findIndex(row => {
 			      const values = row.split(',');
-			      return values[headers.indexOf('username')] === username;
+			      return values[headers.indexOf('busID')] === busID;
 			    });
 			  
 				  
