@@ -105,12 +105,13 @@
 
       const route = document.getElementById('route').value;
       const time = document.getElementById('time').value;
-	  const date = new Date().toLocaleDateString();  // current date
+      const date = new Date().toLocaleDateString();  // current date
+      const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
       const queryParams = new URLSearchParams({
         username: username,
 		phone: phone,
         id: route,
-		date: date,
+		date: formattedDate,
         time: time
       });
 
