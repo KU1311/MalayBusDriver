@@ -105,7 +105,7 @@
 
       const route = document.getElementById('route').value;
       const time = document.getElementById('time').value;
-	  const date = new Date()  // current date
+	  const date = new Date().toLocaleDateString();  // current date
       const queryParams = new URLSearchParams({
         username: username,
 		phone: phone,
