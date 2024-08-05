@@ -127,14 +127,15 @@
 				minute: "2-digit",
 				second: "2-digit"
 			  });
-			const dateF = date.toLocaleString();
+			const dateF = new Date(date);
+			const formattedDate = `${dateF.getFullYear()}/${(dateF.getMonth() + 1).toString().padStart(2, '0')}/${dateF.getDate().toString().padStart(2, '0')}`;
 			const formData = new FormData();
 			formData.append('username', username);
 			formData.append('Route',prouteId);	
 			formData.append('X',currentX);
 			formData.append('Y',currentY);
 			formData.append('last_update',currentDateTime);	
-			formData.append('Date',dateF);	
+			formData.append('Date',formattedDate);	
 			formData.append('Time',time);	
 			
 			console.log('Date: ',dateF);
@@ -157,39 +158,42 @@
 			      const values = row.split(',');
 			      return values[headers.indexOf('username')] === username;
 			    });
-			
+				console.log("Row index ",matchingRowIndex)
 			    if (matchingRowIndex !== -1) {
+
+				    // ----- Found Existing Record ------
+				    
 				    let NEWmatchingRowIndex = matchingRowIndex + 2; // +1 to match with the real row number
 				    console.log("matched row index ",NEWmatchingRowIndex)
 				    formData.append('rowIndex', NEWmatchingRowIndex)
 
 				    
-				    // ----- Found Existing Record ------
 			    	    // delete the old record
+				    // not used
 				    
 				    
-				function toDelete(){
-				    
-				      fetch(scriptURLdel, {
-					  method: 'POST',
-					  body: formData
-					})
-					.then(response => {
-					  if (response.ok) {
-					    console.log('Data posted successfully!');
-					  } else {
-					    console.error('Error posting data:', response.status);
-					  }
-					})
-					.catch(error => {
-					  console.error('Error:', error);
-					});
-				} // end of function toDelete
+					function toDelete(){
+					    
+					      fetch(scriptURLdel, {
+						  method: 'POST',
+						  body: formData
+						})
+						.then(response => {
+						  if (response.ok) {
+						    console.log('Data posted successfully!');
+						  } else {
+						    console.error('Error posting data:', response.status);
+						  }
+						})
+						.catch(error => {
+						  console.error('Error:', error);
+						});
+					} // end of function toDelete
 
 				// ----------------------------------------------------------
 				    
 				// to modify
-				    console.log("Going to modify row ",NEWmatchingRowIndex)
+				console.log("Going to modify row ",NEWmatchingRowIndex)
 				fetch(scriptURLmod, {
 				  method: 'POST',
 				  body: formData
