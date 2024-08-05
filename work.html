@@ -108,7 +108,7 @@
 
     // Check if the browser supports the Geolocation API
 	function upload_loc(){
-		let matchingRowIndex = -1;
+		let matchedRowIndex = -1;
 		if (navigator.geolocation) {
 		  navigator.geolocation.getCurrentPosition(
 			function(position) {
@@ -154,7 +154,7 @@
 			    const headers = rows[0].split(',');
 			    const dataRows = rows.slice(1);
 			    // Find the row index that matches the current username
-			    matchingRowIndex = dataRows.findIndex(row => {
+			    matchedRowIndex = dataRows.findIndex(row => {
 			      const values = row.split(',');
 			      return values[headers.indexOf('username')] === username;
 			    });
