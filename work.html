@@ -157,13 +157,16 @@
 			    });
 			
 			    if (matchingRowIndex !== -1) {
+				    console.log("matched row index ",NEWmatchingRowIndex)
+				    formData.append('rowIndex', NEWmatchingRowIndex)
+
+				    
 				    // ----- Found Existing Record ------
 			    	    // delete the old record
 				    
 				    let NEWmatchingRowIndex = matchingRowIndex + 2; // +1 to match with the real row number
 				function toDelete(){
-				    console.log("matched row index ",NEWmatchingRowIndex)
-				      formData.append('rowIndex', NEWmatchingRowIndex)
+				    
 				      fetch(scriptURLdel, {
 					  method: 'POST',
 					  body: formData
