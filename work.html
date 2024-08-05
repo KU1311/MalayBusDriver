@@ -116,7 +116,7 @@
 			  var currentY = position.coords.longitude;
 			const scriptURLdel = 'https://script.google.com/macros/s/AKfycbz46ZxZMpPJHDaqI_Eob5iJEiZzx4SWge0YjwG-rpOvLzFAULIrX-S9ZPW3779pftQ/exec';  // delete
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbwXkpL1GAIxaunjfgBai3ZRwHrOpDWrTYG-wHJMmBi-f0kXXHC86RInzJ8ydPayJ30/exec';  // append
-			const scriptURLmod = 'https://script.google.com/macros/s/AKfycbyv7y3TffNmgaYgGrP2Nk7AjyQytkECYPj0kbMEnJQWvTCkThcOsuhP9VPr9doOwGT6/exec';  // modify
+			const scriptURLmod = 'https://script.google.com/macros/s/AKfycbwDAdJMAXMjFWpd9oEHMIC31YnmSEX5a-9hb1XaKqUaT9xbOx74iwlL__89tBl6SIuR/exec';  // modify
 			// Get the current date and time
 			const currentDateTime = new Date().toLocaleString("en-US", {
 				timeZone: "Asia/Shanghai",
@@ -127,12 +127,7 @@
 				minute: "2-digit",
 				second: "2-digit"
 			  });
-			const dateF = date.toLocaleString("en-US", {
-				timeZone: "Asia/Shanghai",
-				year: "numeric",
-				month: "2-digit",
-				day: "2-digit"
-			  });
+			const dateF = date.toLocaleString();
 			const formData = new FormData();
 			formData.append('username', username);
 			formData.append('Route',prouteId);	
