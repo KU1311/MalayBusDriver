@@ -162,7 +162,7 @@
 				  }) 
 				} // end of function checkExistRow
 					
-			    matchedRowIndex = checkExistRow()
+			    let matchedRowIndex = checkExistRow()
 			    console.log("Row index ",matchedRowIndex)
 			    if (matchedRowIndex !== -1) {
 
@@ -248,11 +248,6 @@
 
 			
 			  }) // end of function position
-			  .catch(error => {
-			    console.error('Error:', error);
-			  });
-
-			console.log("ok");
 
 	  } else {
 	    console.error('navigator.geolocation Error:', error);
