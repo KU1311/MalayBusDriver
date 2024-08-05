@@ -158,10 +158,7 @@
 			      const values = row.split(',');
 			      return values[headers.indexOf('username')] === username;
 			    });
-			  })
-			  .catch(error => {
-			    console.error('Error:', error);
-			  });
+			  
 				  
 			    console.log("Row index ",matchedRowIndex)
 			    if (matchedRowIndex !== -1) {
@@ -246,7 +243,10 @@
 			    } 
 				// -----------------------------------------
 
-
+				})
+			  .catch(error => {
+			    console.error('Error:', error);
+			  });
 			  
 			  }) // end of function position
 
