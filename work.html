@@ -141,29 +141,33 @@
 			console.log('Date: ',dateF);
 
 			// ----- Check if have existing record
-				
-			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
-			console.log("lookup check")
-			fetch(sheetUrl)
-			  .then(response => response.text())
-			  .then(data => {
-			    console.log("lookup responsed")
-			    // Parse the CSV data
-			    const rows = data.trim().split('\n');
-			    const headers = rows[0].split(',');
-			    const dataRows = rows.slice(1);
-			    let matchingRowIndex = -1;
-			    // Find the row index that matches the current username
-			    matchingRowIndex = dataRows.findIndex(row => {
-			      const values = row.split(',');
-			      return values[headers.indexOf('username')] === username;
-			    });
-				console.log("Row index ",matchingRowIndex)
-			    if (matchingRowIndex !== -1) {
+			function checkExistRow(){
+				const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
+				console.log("lookup check")
+				fetch(sheetUrl)
+				  .then(response => response.text())
+				  .then(data => {
+				    console.log("lookup responsed")
+				    // Parse the CSV data
+				    const rows = data.trim().split('\n');
+				    const headers = rows[0].split(',');
+				    const dataRows = rows.slice(1);
+				    let matchingRowIndex = -1;
+				    // Find the row index that matches the current username
+				    matchingRowIndex = dataRows.findIndex(row => {
+				      const values = row.split(',');
+				      return values[headers.indexOf('username')] === username;
+				    });
+				  return matchingRowIndex;
+				  } // end of function checkExistRow
+					
+			    matchedRowIndex = checkExistRow()
+			    console.log("Row index ",matchedRowIndex)
+			    if (matchedRowIndex !== -1) {
 
 				    // ----- Found Existing Record ------
 				    
-				    let NEWmatchingRowIndex = matchingRowIndex + 2; // +1 to match with the real row number
+				    let NEWmatchingRowIndex = matchedRowIndex + 2; // +1 to match with the real row number
 				    console.log("matched row index ",NEWmatchingRowIndex)
 				    formData.append('rowIndex', NEWmatchingRowIndex)
 
