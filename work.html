@@ -116,6 +116,7 @@
 			  var currentY = position.coords.longitude;
 			const scriptURLdel = 'https://script.google.com/macros/s/AKfycbz46ZxZMpPJHDaqI_Eob5iJEiZzx4SWge0YjwG-rpOvLzFAULIrX-S9ZPW3779pftQ/exec';  // delete
 			const scriptURL = 'https://script.google.com/macros/s/AKfycbwXkpL1GAIxaunjfgBai3ZRwHrOpDWrTYG-wHJMmBi-f0kXXHC86RInzJ8ydPayJ30/exec';  // append
+			const scriptURLmod = 'https://script.google.com/macros/s/AKfycbxqNt58ySqN-3FzChU8hWyWyBOooiTRIG5yw9ilpAJDMsR2ZZotCaLxGwV_XxBcGWnL/exec';  // modify
 			// Get the current date and time
 			const currentDateTime = new Date().toLocaleString("en-US", {
 				timeZone: "Asia/Shanghai",
@@ -160,7 +161,7 @@
 			    	    // delete the old record
 				    
 				    let NEWmatchingRowIndex = matchingRowIndex + 2; // +1 to match with the real row number
-
+				function toDelete(){
 				    console.log("matched row index ",NEWmatchingRowIndex)
 				      formData.append('rowIndex', NEWmatchingRowIndex)
 				      fetch(scriptURLdel, {
@@ -177,13 +178,33 @@
 					.catch(error => {
 					  console.error('Error:', error);
 					});
+				} // end of function toDelete
+
+				// to modify
+				    console.log("Going to modify row ",NEWmatchingRowIndex)
+				fetch(scriptURLmod, {
+				  method: 'POST',
+				  body: formData
+				})
+				.then(response => {
+				  if (response.ok) {
+				    console.log('Data updated successfully!');
+				  } else {
+				    console.error('Error updating data:', response.status);
+				  }
+				})
+				.catch(error => {
+				  console.error('Error:', error);
+				});
+				    
+				    
 			    	}
 				    
 			    
 				// --------------------------------------------	
 				// Append new record	
 			
-			
+				function appendLastRow(){	
 				try {
 					console.log('Now submit to script');
 				// Submit the form and wait for the fetch request to complete
@@ -201,7 +222,7 @@
 					console.error('Error submitting form:', error);
 					// Handle the error, e.g., display an error message to the user
 				}	
-			
+				} // end of function appendLastRow
 			
 			// -----------------------------------------
 
