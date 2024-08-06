@@ -432,7 +432,7 @@
 		    checkBox.type = 'checkbox';
 		    checkBox.checked = item.check || item.checkedin === "checked"; // Check if item.check is true or item.checkedin is "checked"
 		    checkCell.appendChild(checkBox);
-		    checkBox.dataset.rowIndex = index; // Store the row index in the checkbox's dataset
+		    checkBox.dataset.rowIndex = rowindex; // Store the row index in the checkbox's dataset
 		    checkBox.addEventListener('change', handleCheckboxChange);
 		
 		    const numberCell = document.createElement('td');
