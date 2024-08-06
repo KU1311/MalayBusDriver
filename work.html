@@ -313,7 +313,7 @@
 	      let matchedQuota = 0;
 	      let bookedPaxCount = 0;
 	      routes.forEach(route => {
-	        if (route.From === pickupLocation && route.To === dropoffLocation) {
+	        if (route.id === prouteId) {
 	          foundMatch = true;
 	          matchedRouteId = route.id;
 		  matchedQuota = route.Quota;
