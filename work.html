@@ -112,7 +112,21 @@
 	    <td><h3 class="seatCounter" id="availableSeats"></h3></td></td>
 	  </tr>
 	</table>
-  </div>
+	  <div>
+		  <h6>Booked:</h6>
+	  </div>
+	<table class="DetailsTB">
+	  <thead>
+	    <tr>
+	      <th>Check</th>
+	      <th>Number</th>
+	      <th>Pax</th>
+	      <th>Edit</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tableBody"></tbody>
+	</table>
+  </div>  // end of container div
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -305,8 +319,9 @@
 	      const viewDetailsButton = document.getElementById('view-details-btn');
 	      const timeSelector = document.getElementById('time-selector');
 	      const midsStopsSelector = document.getElementById('midstops-selector');
-	
-	      let foundMatch = false;
+	      
+	      let foundMatch = false;	
+	      let paxList = [];
 	      let matchedRouteId;
 	      let matchedQuota = 0;
 	      let bookedPaxCount = 0;
@@ -347,14 +362,46 @@
 			    	const paxOnBoardStop = matchedRowValues[headers.indexOf('midstop')];
 		    	
 				// insert to pax list
+				paxList.push(`${paxname},${paxphone},${paxOnBoardStop},${paxcount}`)
 			}
 		    }	
 		 
 		bookedSeatsElement.textContent = bookedPaxCount	  
 		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
+
+		  // Insert dynamically to the details table
+		const tableBody = document.getElementById('tableBody');
+
+		  paxList.forEach((item) => {
+		    const row = document.createElement('tr');
 		
-	//document.getElementById('bookedSeats').textContent = '10';
-	//document.getElementById('availableSeats').textContent = '20';
+		    const checkCell = document.createElement('td');
+		    const checkBox = document.createElement('input');
+		    checkBox.type = 'checkbox';
+		    checkBox.checked = item.check;
+		    checkCell.appendChild(checkBox);
+		
+		    const numberCell = document.createElement('td');
+		    numberCell.textContent = item.number;
+		
+		    const paxCell = document.createElement('td');
+		    paxCell.textContent = item.pax;
+		
+		    const editCell = document.createElement('td');
+		    const editButton = document.createElement('button');
+		    editButton.textContent = 'Edit';
+		    editCell.appendChild(editButton);
+		
+		    row.appendChild(checkCell);
+		    row.appendChild(numberCell);
+		    row.appendChild(paxCell);
+		    row.appendChild(editCell);
+		
+		    tableBody.appendChild(row);
+		  });
+		
+		//document.getElementById('bookedSeats').textContent = '10';
+		//document.getElementById('availableSeats').textContent = '20';
 	 })
 	}
 	displayFrequencyDetails();
