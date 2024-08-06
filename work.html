@@ -413,7 +413,14 @@
 		console.log("paxList: ",paxList)
 		bookedSeatsElement.textContent = bookedPaxCount	  
 		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
-		  
+
+		  function handleCheckboxChange(event, item, listIndex) {
+			  const checkboxElement = event.target;
+			  console.log("listIndex: ",listIndex)
+			  console.log("item: ",item)
+			  // Update the relevant record in the Google Sheet
+			  updateGoogleSheet(rowIndex, item, checkboxElement.checked);
+		}
 		  // Insert dynamically to the details table
 		const tableBody = document.getElementById('tableBody');
 
@@ -427,7 +434,7 @@
 		    checkCell.appendChild(checkBox);
 		    checkBox.dataset.rowIndex = item.listIndex; // Store the row index in the checkbox's dataset
 		    const listIndex = item.listIndex;
-		    checkBox.addEventListener('change', handleCheckboxChange);
+		    checkBox.addEventListener('change', (event) => handleCheckboxChange(event, item, listIndex));
 		
 		    const numberCell = document.createElement('td');
 		    numberCell.textContent = item.paxphone;
@@ -454,15 +461,7 @@
 	}
 	displayFrequencyDetails();
 
-	function handleCheckboxChange(event) {
-		  const checkboxElement = event.target;
-		  const rowIndex = checkboxElement.dataset.rowIndex;
-		  const item = paxList[listIndex]; // Retrieve the entire item object
-		  console.log("listIndex: ",listIndex)
-		  console.log("item: ",item)
-		  // Update the relevant record in the Google Sheet
-		  updateGoogleSheet(rowIndex, item, checkboxElement.checked);
-		}
+	
 	// Checkbox update sheet
 	async function updateGoogleSheet(rowIndex, item, value) {
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
