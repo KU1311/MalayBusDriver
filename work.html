@@ -376,6 +376,8 @@
 		    	const matchedRowValues = dataRows[i].split(',').map(data => data.replace('\r', '').replace('"', ''));  
 			    console.log("matchedRowValues: ",matchedRowValues)
 			const paxRouteID = matchedRowValues[headers.indexOf('id')];
+			const paxRoutePickup = matchedRowValues[headers.indexOf('pickup')];
+			const paxRouteDropoff = matchedRowValues[headers.indexOf('dropoff')];
 		    	const paxdate = matchedRowValues[headers.indexOf('date')];
 		    	const paxtime = matchedRowValues[headers.indexOf('time')];
 		    	console.log("Now compare: ", paxRouteID,paxdate, paxtime)  
@@ -391,18 +393,34 @@
 		    	
 				// insert to pax list
 				paxList.push({
-				  checkedin: paxChecked,
-				  paxcount: paxcount,
 				  paxname: paxname,
 				  paxphone: paxphone,
-				  onBoardStop: paxOnBoardStop
+				  routeID: paxRouteID,
+				  pickup: paxRoutePickup,
+				  dropoff: paxRouteDropoff,
+				  onBoardStop: paxOnBoardStop,
+				  date: paxdate,
+				  time: paxtime,
+				  paxcount: paxcount,
+				  checkedin: paxChecked,
+				  rowindex: i+1
 				});
 			}
 		    }	
 		console.log("paxList: ",paxList)
 		bookedSeatsElement.textContent = bookedPaxCount	  
 		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
-
+		  
+		function handleCheckboxChange(event) {
+		  const checkboxElement = event.target;
+		  const rowIndex = checkboxElement.dataset.rowIndex;
+		  const item = paxList[rowIndex]; // Retrieve the entire item object
+		  console.log("rowIndex: ",rowIndex)
+		  console.log("item: ",item)
+		  // Update the relevant record in the Google Sheet
+		  updateGoogleSheet(rowIndex, item, checkboxElement.checked);
+		}
+  
 		  // Insert dynamically to the details table
 		const tableBody = document.getElementById('tableBody');
 
@@ -414,6 +432,8 @@
 		    checkBox.type = 'checkbox';
 		    checkBox.checked = item.check || item.checkedin === "checked"; // Check if item.check is true or item.checkedin is "checked"
 		    checkCell.appendChild(checkBox);
+		    checkBox.dataset.rowIndex = index; // Store the row index in the checkbox's dataset
+		    checkBox.addEventListener('change', handleCheckboxChange);
 		
 		    const numberCell = document.createElement('td');
 		    numberCell.textContent = item.paxphone;
@@ -439,7 +459,45 @@
 	 })
 	}
 	displayFrequencyDetails();
+
 	
+	// Checkbox update sheet
+	async function updateGoogleSheet(rowIndex, item, value) {
+		scriptURLBookingmod = 
+		console.log("Now update google sheet checkbox: ", value)
+		const newCheckinValue = value ? "checked" : "";
+		const formData = new FormData();
+			formData.append('username', item.paxname);
+			formData.append('phone', item.paxphone);
+			formData.append('id', item.routeID);
+			formData.append('pickup', item.pickup);
+			formData.append('dropoff', item.dropoff);
+			formData.append('midstops', item.onBoardStop);
+			formData.append('date', item.date);
+			formData.append('time', item.time);
+			formData.append('passengers', item.paxcount);
+			formData.append('check', newCheckinValue);
+			formData.append('rowIndex', rowIndex)
+
+			console.log("Going to modify booking row ",rowIndex)
+				fetch(scriptURLBookingmod, {
+				  method: 'POST',
+				  body: formData
+				})
+				.then(response => {
+				  if (response.ok) {
+				    console.log('Booking status updated');
+				  } else {
+				    response.json().then(data => {
+				      console.error('Error updating data:', data.error);
+				    });
+				  }
+				})
+				.catch(error => {
+				  console.error('Error:', error);
+				});
+				    
+	}
   </script>
 
 </body>
