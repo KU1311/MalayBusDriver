@@ -333,7 +333,7 @@
 		    const headers = rows[0].split(',');
 		    const dataRows = rows.slice(1);
 		
-
+		    	const matchedRowValues = dataRows[i].split(',').map(data => data.replace('\r', '').replace('"', ''));  
 		    	const paxdate = matchedRowValues[headers.indexOf('date')];
 		    	const paxtime = matchedRowValues[headers.indexOf('time')];
 		    	const paxcount = parseFloat(matchedRowValues[headers.indexOf('passengers')]);
