@@ -354,6 +354,7 @@
 		    	console.log("Now compare: ", paxRouteID,paxdate, paxtime)  
 			if (paxRouteID === prouteId && date === paxdate && time === paxtime) {
 			      const paxcount = Number(matchedRowValues[headers.indexOf('passengers')]);
+			      const paxChecked = matchedRowValues[headers.indexOf('check')];
 			      console.log("pax found. count: ",paxcount)
 			      bookedPaxCount = bookedPaxCount + paxcount
 				console.log("Acc count: ",bookedPaxCount)
@@ -362,10 +363,16 @@
 			    	const paxOnBoardStop = matchedRowValues[headers.indexOf('midstop')];
 		    	
 				// insert to pax list
-				paxList.push(`${paxname},${paxphone},${paxOnBoardStop},${paxcount}`)
+				paxList.push({
+				  check: paxChecked,
+				  paxcount: paxcount,
+				  paxname: paxname,
+				  paxphone: paxphone,
+				  onBoardStop: paxOnBoardStop
+				});
 			}
 		    }	
-		 
+		console.log("paxList: ",paxList)
 		bookedSeatsElement.textContent = bookedPaxCount	  
 		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
 
