@@ -480,7 +480,7 @@
 			formData.append('check', newCheckinValue);
 			formData.append('rowIndex', item.rowIndex)
 
-			console.log("Going to modify booking row ",rowIndex)
+			console.log("Going to modify booking row ",item.rowIndex)
 				fetch(scriptURLBookingmod, {
 				  method: 'POST',
 				  body: formData
