@@ -352,6 +352,7 @@
 	      let matchedRouteId;
 	      let matchedQuota = 0;
 	      let bookedPaxCount = 0;
+	      let j = 0;
 	      routes.forEach(route => {
 	        if (route.id === prouteId) {
 	          foundMatch = true;
@@ -390,7 +391,7 @@
 				const paxname = matchedRowValues[headers.indexOf('username')];
 			    	const paxphone = matchedRowValues[headers.indexOf('phone')];
 			    	const paxOnBoardStop = matchedRowValues[headers.indexOf('midstop')];
-		    	
+		    		
 				// insert to pax list
 				paxList.push({
 				  paxname: paxname,
@@ -403,8 +404,10 @@
 				  time: paxtime,
 				  paxcount: paxcount,
 				  checkedin: paxChecked,
-				  rowindex: i+1
+				  rowindex: i+1,
+				  listIndex: j
 				});
+				j = j+1;
 			}
 		    }	
 		console.log("paxList: ",paxList)
@@ -414,8 +417,8 @@
 		function handleCheckboxChange(event) {
 		  const checkboxElement = event.target;
 		  const rowIndex = checkboxElement.dataset.rowIndex;
-		  const item = paxList[rowIndex]; // Retrieve the entire item object
-		  console.log("rowIndex: ",rowIndex)
+		  const item = paxList[listIndex]; // Retrieve the entire item object
+		  console.log("listIndex: ",listIndex)
 		  console.log("item: ",item)
 		  // Update the relevant record in the Google Sheet
 		  updateGoogleSheet(rowIndex, item, checkboxElement.checked);
@@ -432,7 +435,7 @@
 		    checkBox.type = 'checkbox';
 		    checkBox.checked = item.check || item.checkedin === "checked"; // Check if item.check is true or item.checkedin is "checked"
 		    checkCell.appendChild(checkBox);
-		    checkBox.dataset.rowIndex = item.rowindex; // Store the row index in the checkbox's dataset
+		    checkBox.dataset.rowIndex = item.listIndex; // Store the row index in the checkbox's dataset
 		    checkBox.addEventListener('change', handleCheckboxChange);
 		
 		    const numberCell = document.createElement('td');
