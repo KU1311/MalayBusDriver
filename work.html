@@ -119,6 +119,25 @@
 	    .DetailsTB input[type="checkbox"] {
 	      transform: scale(2); /* Increase the scale of the checkbox */
 	    }
+
+	    .modal {
+	      display: none;
+	      position: fixed;
+	      z-index: 1;
+	      left: 0;
+	      top: 0;
+	      width: 100%;
+	      height: 100%;
+	      overflow: auto;
+	      background-color: rgba(0, 0, 0, 0.4);
+	    }
+	
+	    .modal-content {
+	      background-color: #fefefe;
+	      margin: 15% auto;
+	      padding: 20px;
+	      border: 1px solid #888;
+	      width: 30%;
   </style>
 </head>
 <body>
@@ -153,6 +172,14 @@
 	  </thead>
 	  <tbody id="tableBody"></tbody>
 	</table>
+
+	  <div id="myModal" class="modal">
+	    <div class="modal-content">
+	      <h2>No. of pax</h2>
+	      <input type="number" id="paxCountInput" />
+	      <button id="submitButton">Submit</button>
+	    </div>
+	  </div>
   </div> 
 
 <script>
@@ -453,6 +480,38 @@
 		    row.appendChild(editCell);
 		
 		    tableBody.appendChild(row);
+
+
+
+			// Edit button pop-ups
+			  var modal = document.getElementById("myModal");
+			
+			    // Get the <span> element that closes the modal
+			    var span = document.getElementsByClassName("close")[0];
+			
+			    // When the user clicks the edit button, open the modal
+			    editButton.addEventListener("click", function() {
+			      modal.style.display = "block";
+			      document.getElementById("paxCountInput").value = item.paxcount;
+			    });
+			
+			    // When the user clicks the submit button, update the Google Sheet
+			    document.getElementById("submitButton").addEventListener("click", function() {
+			      const newPaxCount = document.getElementById("paxCountInput").value;
+			      if (newPaxCount !== item.paxcount) {
+			        // Update the Google Sheet with the new pax count
+			        updateGoogleSheetPaxCount(item, newPaxCount);
+			      }
+			      modal.style.display = "none";
+			    });
+			
+			    // When the user clicks anywhere outside of the modal, close it
+			    window.addEventListener("click", function(event) {
+			      if (event.target == modal) {
+			        modal.style.display = "none";
+			      }
+			    });
+			  
 		  });
 		
 		//document.getElementById('bookedSeats').textContent = '10';
@@ -461,6 +520,11 @@
 	}
 	displayFrequencyDetails();
 
+	// Update Pax count
+	async function updateGoogleSheetPaxCount(item, newPaxCount) {
+	      // Update the Google Sheet with the new pax count
+	      console.log("updateGoogleSheetPaxCount")
+	    }
 	
 	// Checkbox update sheet
 	async function updateGoogleSheet(item, value) {
