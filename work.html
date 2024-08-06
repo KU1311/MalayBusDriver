@@ -332,7 +332,7 @@
 		    const rows = data.trim().split('\n');
 		    const headers = rows[0].split(',');
 		    const dataRows = rows.slice(1);
-		
+		    for (let i = 0; i < dataRows.length; i++) {
 		    	const matchedRowValues = dataRows[i].split(',').map(data => data.replace('\r', '').replace('"', ''));  
 		    	const paxdate = matchedRowValues[headers.indexOf('date')];
 		    	const paxtime = matchedRowValues[headers.indexOf('time')];
