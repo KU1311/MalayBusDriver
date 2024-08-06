@@ -387,7 +387,7 @@
 		    	
 				// insert to pax list
 				paxList.push({
-				  check: paxChecked,
+				  checkedin: paxChecked,
 				  paxcount: paxcount,
 				  paxname: paxname,
 				  paxphone: paxphone,
@@ -408,7 +408,7 @@
 		    const checkCell = document.createElement('td');
 		    const checkBox = document.createElement('input');
 		    checkBox.type = 'checkbox';
-		    checkBox.checked = item.check;
+		    checkBox.checked = item.check || item.checkedin === "checked"; // Check if item.check is true or item.checkedin is "checked"
 		    checkCell.appendChild(checkBox);
 		
 		    const numberCell = document.createElement('td');
