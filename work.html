@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Shuttle</title>
+  <title>Working</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -72,14 +72,19 @@
 	  color: black
 	}
 	table {
-	  margin: 0 auto;
-	  text-align: left;
-
-	th, td {
-	  padding: 8px;	
-	  text-align: left;
-	  border-bottom: 1px solid #ddd;
-	}
+	    border-collapse: collapse;
+	    width: 100%;
+	  }
+	
+	  th, td {
+	    padding: 8px;
+	    text-align: left;
+	    border-bottom: 1px solid #ddd;
+	  }
+	
+	  th {
+	    background-color: #f2f2f2;
+	  }
   </style>
 </head>
 <body>
@@ -89,7 +94,17 @@
 	  <h3 id="route">ROUTE</h3>
 	  </div>
 	</div>
-
+	<table>
+	  <tr>
+	    <th>Booked</th>
+	    <td id="bookedSeats"></td>
+	  </tr>
+	  <tr>
+	    <th>Available for Walk-in</th>
+	    <td id="availableSeats"></td>
+	  </tr>
+	</table>
+  </div>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -262,7 +277,14 @@
 	window.addEventListener('load', function() {
 	  intervalId = setInterval(upload_loc, 60000); // 60000 milliseconds = 1 minute
 	});
+
+
+
+	// -----------------------------------------------------------------------------
+	// Seat counters
 	
+	document.getElementById('bookedSeats').textContent = '10';
+	document.getElementById('availableSeats').textContent = '20';
 	
   </script>
 
