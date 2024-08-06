@@ -463,7 +463,7 @@
 	
 	// Checkbox update sheet
 	async function updateGoogleSheet(rowIndex, item, value) {
-		scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
+		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
 		console.log("Now update google sheet checkbox: ", value)
 		const newCheckinValue = value ? "checked" : "";
 		const formData = new FormData();
