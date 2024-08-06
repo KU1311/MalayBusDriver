@@ -292,9 +292,73 @@
 
 	// -----------------------------------------------------------------------------
 	// Seat counters
+	import { getRoutes } from './routes.js';
+	async function displayFrequencyDetails() {
+	      const routes = await getRoutes();
 	
-	document.getElementById('bookedSeats').textContent = '10';
-	document.getElementById('availableSeats').textContent = '20';
+	      // Get the pickup and dropoff locations from the HTML
+	      const bookedSeatsElement = document.getElementById('bookedSeats');
+	      const availableSeatsElement = document.getElementById('availableSeats');
+	
+	      const timeff = document.getElementById('timef');
+	      const stopff = document.getElementById('stopf');
+	      const idff = document.getElementById('idf');
+	      
+	      const viewDetailsButton = document.getElementById('view-details-btn');
+	      const timeSelector = document.getElementById('time-selector');
+	      const midsStopsSelector = document.getElementById('midstops-selector');
+	
+	      let foundMatch = false;
+	      let matchedRouteId;
+	      let matchedQuota = 0;
+	      let bookedPaxCount = 0;
+	      routes.forEach(route => {
+	        if (route.From === pickupLocation && route.To === dropoffLocation) {
+	          foundMatch = true;
+	          matchedRouteId = route.id;
+		  matchedQuota = route.Quota;
+		  console.log("Quota: ",matchedQuota)
+	        }
+	      });
+
+		// get count from bookings
+		const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
+		console.log("bookings lookup check")
+		fetch(sheetUrl)
+		  .then(response => response.text())
+		  .then(data => {
+		    console.log("lookup responsed")
+		    // Parse the CSV data
+		    const rows = data.trim().split('\n');
+		    const headers = rows[0].split(',');
+		    const dataRows = rows.slice(1);
+		
+
+		    	const paxdate = matchedRowValues[headers.indexOf('date')];
+		    	const paxtime = matchedRowValues[headers.indexOf('time')];
+		    	const paxcount = parseFloat(matchedRowValues[headers.indexOf('passengers')]);
+		    	  
+			if (route === prouteId && date === paxdate && time === paxtime)) {
+			      console.log("pax found: ",paxname)
+			      bookedPaxCount = bookedPaxCount + paxcount
+				const paxname = matchedRowValues[headers.indexOf('username')];
+			    	const paxphone = matchedRowValues[headers.indexOf('phone')];
+			    	const paxOnBoardStop = matchedRowValues[headers.indexOf('midstop')];
+				// insert to pax list
+
+				
+			} else {
+			   console.log("No pax found")
+			}
+		  }
+		bookedSeatsElement.textContent = bookedPaxCount	  
+		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
+		
+	//document.getElementById('bookedSeats').textContent = '10';
+	//document.getElementById('availableSeats').textContent = '20';
+	
+	}
+	displayFrequencyDetails();
 	
   </script>
 
