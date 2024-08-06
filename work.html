@@ -72,20 +72,17 @@
 	  font-weight: bold;
 	  color: black
 	}
-	table {
+	.countTB {
 	    border-collapse: collapse;
 	    width: 100%;
 	  }
 	
-	  th, td {
+	  .countTBcell {
 	    padding: 8px;
 	    text-align: left;
 	    height: 48px; /* Set the desired height for the rows */
 	  }
 	
-	  th {
-	    background-color: #f2f2f2;
-	  }
 	    h3 {
 	    margin: 0; /* Remove the default margin for the h3 elements */
 	  }
@@ -104,13 +101,13 @@
 		  <br>
 	  </div>
 	</div>
-	<table>
+	<table class="countTB">
 	  <tr>
-	    <th>Booked</th>
+	    <td class = "countTBcell">Booked</td>
 	    <td><h3 class="seatCounter" id="bookedSeats"></h3></td>
 	  </tr>
 	  <tr>
-	    <th>Available for Walk-in</th>
+	    <td class = "countTBcell">Available for Walk-in</td>
 	    <td><h3 class="seatCounter" id="availableSeats"></h3></td></td>
 	  </tr>
 	</table>
