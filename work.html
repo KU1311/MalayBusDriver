@@ -400,7 +400,7 @@
 	      const viewDetailsButton = document.getElementById('view-details-btn');
 	      const timeSelector = document.getElementById('time-selector');
 	      const midsStopsSelector = document.getElementById('midstops-selector');
-	      
+	      const modal_item;
 	      let foundMatch = false;	
 	      let paxList = [];
 	      let matchedRouteId;
@@ -479,6 +479,7 @@
 		const tableBody = document.getElementById('tableBody');
 			  
 		// Attach the event listener to the parent element
+			  function not_used_B{
 		document.getElementById('tableBody').addEventListener('click', function(event) {
 		  if (event.target.matches('button.editButton')) {
 		    // Edit button clicked
@@ -488,7 +489,7 @@
 		    handlePopupButton(event);
 		  }
 		});
-	
+			  }
 
 		 // When the user clicks anywhere outside of the modal, close it
 		    window.addEventListener("click", function(event) {
@@ -531,12 +532,7 @@
 		    editButton.addEventListener("click", function() {
 		      modal.style.display = "block";
 		      document.getElementById("paxCountInput").value = item.paxcount;
-
-
-			
-
-
-
+			model_item = item;
 			    
 		    });
 
@@ -545,45 +541,42 @@
 		  });
 	
 	 })
+	function not_used_C{
+		function handleEditButton(event) {
+		  // Get the relevant pax item from the event target
+		  const paxItem = event.target.closest('.paxItem');
+		  
+		  // Populate the popup content with the relevant information
+		  const paxCountInput = document.getElementById('paxCountInput');
+		  paxCountInput.value = paxItem.querySelector('.paxCountInput').value;
+		  
+		  // Show the popup
+		  document.getElementById('popup').style.display = 'block';
+		}
 		
-	function handleEditButton(event) {
-	  // Get the relevant pax item from the event target
-	  const paxItem = event.target.closest('.paxItem');
-	  
-	  // Populate the popup content with the relevant information
-	  const paxCountInput = document.getElementById('paxCountInput');
-	  paxCountInput.value = paxItem.querySelector('.paxCountInput').value;
-	  
-	  // Show the popup
-	  document.getElementById('popup').style.display = 'block';
+		function handlePopupButton(event) {
+		  if (event.target.id === 'incrementButton') {
+		    // Increment button clicked
+		    const paxCountInput = document.getElementById('paxCountInput');
+		    paxCountInput.value = parseInt(paxCountInput.value) + 1;
+		  } else if (event.target.id === 'decrementButton') {
+		    // Decrement button clicked
+		    const paxCountInput = document.getElementById('paxCountInput');
+		    const currentValue = parseInt(paxCountInput.value);
+		    if (currentValue > 0) {
+		      paxCountInput.value = currentValue - 1;
+		    }
+		  } else if (event.target.id === 'submitButton') {
+		    // Submit button clicked
+		    const newPaxCount = document.getElementById('paxCountInput').value;
+		    // Update the Google Sheet with the new pax count
+		    updateGoogleSheetPaxCount(item, newPaxCount);
+		    document.getElementById('popup').style.display = 'none';
+		  }
+		}
 	}
-	
-	function handlePopupButton(event) {
-	  if (event.target.id === 'incrementButton') {
-	    // Increment button clicked
-	    const paxCountInput = document.getElementById('paxCountInput');
-	    paxCountInput.value = parseInt(paxCountInput.value) + 1;
-	  } else if (event.target.id === 'decrementButton') {
-	    // Decrement button clicked
-	    const paxCountInput = document.getElementById('paxCountInput');
-	    const currentValue = parseInt(paxCountInput.value);
-	    if (currentValue > 0) {
-	      paxCountInput.value = currentValue - 1;
-	    }
-	  } else if (event.target.id === 'submitButton') {
-	    // Submit button clicked
-	    const newPaxCount = document.getElementById('paxCountInput').value;
-	    // Update the Google Sheet with the new pax count
-	    updateGoogleSheetPaxCount(item, newPaxCount);
-	    document.getElementById('popup').style.display = 'none';
-	  }
-	}
-			
-	}  // end of function displayFrequencyDetails
-	displayFrequencyDetails();
 
-			// not used
-			function editbutton_old(){
+
 			// Edit button pop-ups
 			 
 			    // When the user clicks the increment button, increase the pax count
@@ -608,9 +601,9 @@
 			    // When the user clicks the submit button, update the Google Sheet
 			    document.getElementById("submitButton").addEventListener("click", function() {
 			      const newPaxCount = document.getElementById("paxCountInput").value;
-			      if (newPaxCount !== item.paxcount) {
+			      if (newPaxCount !== modal_item.paxcount) {
 			        // Update the Google Sheet with the new pax count
-			        updateGoogleSheetPaxCount(item, newPaxCount);
+			        updateGoogleSheetPaxCount(modal_item, newPaxCount);
 			      }
 			      modal.style.display = "none";
 			    });
@@ -621,13 +614,21 @@
 			        modal.style.display = "none";
 			      }
 			    });
-			}
+			
 	
 	 		// Get the modal
 			    var modal = document.getElementById("myModal");
 			
 			    // Get the <span> element that closes the modal
 			    var span = document.getElementsByClassName("close")[0];
+
+
+		
+	}  // end of function displayFrequencyDetails
+	displayFrequencyDetails();
+
+			
+			
 	
 	// Update Pax count
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
