@@ -525,14 +525,18 @@
 			
 			    // When the user clicks the increment button, increase the pax count
 			    document.getElementById("incrementButton").addEventListener("click", function() {
+				    console.log("Increased from ", parseInt(document.getElementById("paxCountInput").value))
 			      document.getElementById("paxCountInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
+				    console.log("Increased to ",  document.getElementById("paxCountInput").value)
 			    });
 			
 			    // When the user clicks the decrement button, decrease the pax count
 			    document.getElementById("decrementButton").addEventListener("click", function() {
 			      const currentValue = parseInt(document.getElementById("paxCountInput").value);
+				    console.log("Decreased from ", currentValue)
 			      if (currentValue > 0) {
 			        document.getElementById("paxCountInput").value = currentValue - 1;
+				      console.log("Decreased to ", document.getElementById("paxCountInput").value)
 			      }
 			    });
 			
@@ -554,9 +558,7 @@
 			    });
 			  
 		  });
-		
-		//document.getElementById('bookedSeats').textContent = '10';
-		//document.getElementById('availableSeats').textContent = '20';
+	
 	 })
 	}
 	displayFrequencyDetails();
