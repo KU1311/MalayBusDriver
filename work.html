@@ -176,7 +176,11 @@
 	  <div id="myModal" class="modal">
 	    <div class="modal-content">
 	      <h2>No. of pax</h2>
-	      <input type="number" id="paxCountInput" />
+	      <div class="pax-input-container">
+	        <button id="decrementButton">-</button>
+	        <input type="number" id="paxCountInput" />
+	        <button id="incrementButton">+</button>
+	      </div>
 	      <button id="submitButton">Submit</button>
 	    </div>
 	  </div>
@@ -484,7 +488,8 @@
 
 
 			// Edit button pop-ups
-			  var modal = document.getElementById("myModal");
+			  // Get the modal
+			    var modal = document.getElementById("myModal");
 			
 			    // Get the <span> element that closes the modal
 			    var span = document.getElementsByClassName("close")[0];
@@ -493,6 +498,19 @@
 			    editButton.addEventListener("click", function() {
 			      modal.style.display = "block";
 			      document.getElementById("paxCountInput").value = item.paxcount;
+			    });
+			
+			    // When the user clicks the increment button, increase the pax count
+			    document.getElementById("incrementButton").addEventListener("click", function() {
+			      document.getElementById("paxCountInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
+			    });
+			
+			    // When the user clicks the decrement button, decrease the pax count
+			    document.getElementById("decrementButton").addEventListener("click", function() {
+			      const currentValue = parseInt(document.getElementById("paxCountInput").value);
+			      if (currentValue > 0) {
+			        document.getElementById("paxCountInput").value = currentValue - 1;
+			      }
 			    });
 			
 			    // When the user clicks the submit button, update the Google Sheet
@@ -523,7 +541,7 @@
 	// Update Pax count
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
 	      // Update the Google Sheet with the new pax count
-	      console.log("updateGoogleSheetPaxCount")
+	      console.log("Going to update paxcount from ", item.paxcount, " to ", newPaxCount)
 	    }
 	
 	// Checkbox update sheet
