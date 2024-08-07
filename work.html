@@ -480,10 +480,10 @@
 			  
 		// Attach the event listener to the parent element
 		document.getElementById('tableBody').addEventListener('click', function(event) {
-		  if (event.target.matches('#paxList button.editButton')) {
+		  if (event.target.matches('button.editButton')) {
 		    // Edit button clicked
 		    handleEditButton(event);
-		  } else if (event.target.matches('#popup button')) {
+		  } else if (event.target.matches('#myModal button')) {
 		    // Button inside the popup clicked
 		    handlePopupButton(event);
 		  }
