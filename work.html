@@ -495,7 +495,7 @@
 		    }	
 		console.log("paxList: ",paxList)
 		bookedSeatsElement.textContent = bookedPaxCount	  
-		availableSeatsElement.textContent = matchedQuota - bookedPaxCount
+		availableSeatsElement.textContent = busCap - bookedPaxCount - busWalkin
 
 		  function handleCheckboxChange(event, item, listIndex) {
 			  const checkboxElement = event.target;
@@ -584,6 +584,7 @@
 			      if (newPaxCount !== modal_item.paxcount) {
 			        // Update the Google Sheet with the new pax count
 			        updateGoogleSheetPaxCount(modal_item, newPaxCount);
+			        location.reload(true);
 			      }
 			      modal.style.display = "none";
 			    });
@@ -639,7 +640,7 @@
 				const walkincount = document.getElementById("walkinInput").value;
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
-			      
+			      	location.reload(true);
 			      walkinmodal.style.display = "none";
 			    });
 
