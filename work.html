@@ -539,6 +539,14 @@
 			    const editButton = document.createElement('button');
 			    editButton.textContent = 'Edit';
 			    editCell.appendChild(editButton);
+
+				// When the user clicks the edit button, open the modal
+			    editButton.addEventListener("click", function() {
+			      modal.style.display = "block";
+			      document.getElementById("paxCountInput").value = item.paxcount;
+				modal_item = item;
+				    
+		    });
 			}
 		    row.appendChild(checkCell);
 		    row.appendChild(numberCell);
@@ -547,13 +555,7 @@
 		
 		    tableBody.appendChild(row);
 
-		    // When the user clicks the edit button, open the modal
-		    editButton.addEventListener("click", function() {
-		      modal.style.display = "block";
-		      document.getElementById("paxCountInput").value = item.paxcount;
-			modal_item = item;
-			    
-		    });
+		    
 
 			
 			  
