@@ -625,6 +625,7 @@
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
 		console.log("Now update google sheet checkbox: ", value)
 		console.log(item)
+		const itemdate = item.date;
 		const newCheckinValue = value ? "checked" : "";
 		const formData = new FormData();
 			formData.append('username', item.paxname);
@@ -633,7 +634,7 @@
 			formData.append('pickup', item.pickup);
 			formData.append('dropoff', item.dropoff);
 			formData.append('midstops', item.onBoardStop);
-			formData.append('date', item.date);
+			formData.append('date', itemdate);
 			formData.append('time', item.time);
 			formData.append('passengers', item.paxcount);
 			formData.append('check', newCheckinValue);
