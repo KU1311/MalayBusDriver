@@ -211,10 +211,10 @@
 	
 	<div id="walkinModal" class="modal">
 	    <div class="walkinModal-content">
-	      <h2>No. of pax</h2>
+	      <h2>Add Walk-in pax</h2>
 	      <div class="pax-input-container">
 	        <button id="decrementButton">-</button>
-	        <input type="number" id="walkinInput" />
+	        <input type="number" id="walkinInput" value="1" min="0">
 	        <button id="incrementButton">+</button>
 	      </div>
 	      <button id="walkinsubmitButton">Submit</button>
@@ -226,7 +226,7 @@
 	      <h2>No. of pax</h2>
 	      <div class="pax-input-container">
 	        <button id="decrementButton">-</button>
-	        <input type="number" id="paxCountInput" />
+	        <input type="number" id="paxCountInput" min="0">
 	        <button id="incrementButton">+</button>
 	      </div>
 	      <button id="submitButton">Submit</button>
