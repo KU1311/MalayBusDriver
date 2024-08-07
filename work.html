@@ -656,6 +656,7 @@
 	async function updateGoogleSheetWalkinCount(walkincount) {
 		console.log("Going to update paxcount from ", walkincount)
 		busWalkin = busWalkin + walkincount;
+		console.log("acc busWalkin: ",busWalkin)
 	}
 	
 	// Update Pax count
@@ -700,6 +701,7 @@
 	// Checkbox update sheet
 	async function updateGoogleSheet(item, value) {
 		busChecked = busChecked + item.paxcount;
+		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
 		console.log("Now update google sheet checkbox: ", value)
 		console.log(item)
