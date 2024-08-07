@@ -584,7 +584,7 @@
 			      if (newPaxCount !== modal_item.paxcount) {
 			        // Update the Google Sheet with the new pax count
 			        updateGoogleSheetPaxCount(modal_item, newPaxCount);
-			        location.reload(true);
+			        reloadWithoutCache();
 			      }
 			      modal.style.display = "none";
 			    });
@@ -640,7 +640,7 @@
 				const walkincount = document.getElementById("walkinInput").value;
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
-			      	location.reload(true);
+			      	reloadWithoutCache();
 			      walkinmodal.style.display = "none";
 			    });
 
@@ -738,6 +738,23 @@
 				});
 				    
 	}
+
+
+	function reloadWithoutCache() {
+	    fetch(window.location.href, {
+	      cache: 'no-cache',
+	      headers: {
+	        'Pragma': 'no-cache',
+	        'Cache-Control': 'no-cache, no-store, must-revalidate'
+	      }
+	    })
+	    .then(response => response.text())
+	    .then(html => {
+	      document.open();
+	      document.write(html);
+	      document.close();
+	    });
+	  }
   </script>
 
 </body>
