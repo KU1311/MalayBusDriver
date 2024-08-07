@@ -614,19 +614,19 @@
 		// When the user clicks the increment button, increase the pax count
 			    document.getElementById("walkinincrementButton").addEventListener("click", function() {
 				    event.stopPropagation(); // Stop event propagation
-				    console.log("Increased from ", parseInt(document.getElementById("paxCountInput").value))
-			      document.getElementById("paxCountInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
-				    console.log("Increased to ",  document.getElementById("paxCountInput").value)
+				    console.log("Increased from ", parseInt(document.getElementById("walkinInput").value))
+			      document.getElementById("walkinInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
+				    console.log("Increased to ",  document.getElementById("walkinInput").value)
 			    });
 			
 			    // When the user clicks the decrement button, decrease the pax count
 			    document.getElementById("walkindecrementButton").addEventListener("click", function() {
 				    event.stopPropagation(); // Stop event propagation
-			      const currentValue = parseInt(document.getElementById("paxCountInput").value);
+			      const currentValue = parseInt(document.getElementById("walkinInput").value);
 				    console.log("Decreased from ", currentValue)
 			      if (currentValue > 0) {
-			        document.getElementById("paxCountInput").value = currentValue - 1;
-				      console.log("Decreased to ", document.getElementById("paxCountInput").value)
+			        document.getElementById("walkinInput").value = currentValue - 1;
+				      console.log("Decreased to ", document.getElementById("walkinInput").value)
 			      }
 			    });
 			
@@ -636,7 +636,7 @@
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
 			      
-			      modal.style.display = "none";
+			      walkinmodal.style.display = "none";
 			    });
 
 	
