@@ -585,6 +585,7 @@
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
 	      // Update the Google Sheet with the new pax count
 	      console.log("Going to update paxcount from ", item.paxcount, " to ", newPaxCount)
+		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
 		const formData = new FormData();
 			formData.append('username', item.paxname);
 			formData.append('phone', item.paxphone);
