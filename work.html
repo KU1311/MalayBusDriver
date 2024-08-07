@@ -515,14 +515,7 @@
 
 
 			// Edit button pop-ups
-			  // Get the modal
-			    var modal = document.getElementById("myModal");
-			
-			    // Get the <span> element that closes the modal
-			    var span = document.getElementsByClassName("close")[0];
-			
-			    
-			
+			 
 			    // When the user clicks the increment button, increase the pax count
 			    document.getElementById("incrementButton").addEventListener("click", function() {
 				    event.stopPropagation(); // Stop event propagation
@@ -575,7 +568,11 @@
 	}  // end of function displayFrequencyDetails
 	displayFrequencyDetails();
 
-	
+	 		// Get the modal
+			    var modal = document.getElementById("myModal");
+			
+			    // Get the <span> element that closes the modal
+			    var span = document.getElementsByClassName("close")[0];
 	
 	// Update Pax count
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
