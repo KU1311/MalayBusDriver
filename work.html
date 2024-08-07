@@ -585,6 +585,7 @@
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
 	      // Update the Google Sheet with the new pax count
 	      console.log("Going to update paxcount from ", item.paxcount, " to ", newPaxCount)
+		console.log(item)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
 		const formData = new FormData();
 			formData.append('username', item.paxname);
@@ -598,7 +599,7 @@
 			formData.append('passengers', newPaxCount);
 			formData.append('check', item.checkedin);
 			formData.append('rowIndex', item.rowIndex)
-
+			console.log(formData)
 			console.log("Going to modify booking row ",item.rowIndex)
 				fetch(scriptURLBookingmod, {
 				  method: 'POST',
@@ -623,6 +624,7 @@
 	async function updateGoogleSheet(item, value) {
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbwM5FnWOzJ0pnFgiKZcAPCCNUpklHXXJgxOxZ0oVxq0X1rJYBZYv2IzircxXhchd-Jbgw/exec';
 		console.log("Now update google sheet checkbox: ", value)
+		console.log(item)
 		const newCheckinValue = value ? "checked" : "";
 		const formData = new FormData();
 			formData.append('username', item.paxname);
@@ -636,7 +638,7 @@
 			formData.append('passengers', item.paxcount);
 			formData.append('check', newCheckinValue);
 			formData.append('rowIndex', item.rowIndex)
-
+			console.log(formData)
 			console.log("Going to modify booking row ",item.rowIndex)
 				fetch(scriptURLBookingmod, {
 				  method: 'POST',
