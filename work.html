@@ -238,6 +238,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
     const busID = urlParams.get('busID');
+    const busCap = urlParams.get('busCap');
     const prouteId = urlParams.get('id');
 	const routeElement = document.getElementById('route');
 	const date = urlParams.get('date');
@@ -249,8 +250,10 @@
 </script>	
 <script type="module">
 	let intervalId;
-
+	let busChecked = 0;
+	let busWalkin = 0;
     // Check if the browser supports the Geolocation API
+	// Upload live location to driver_location
 	function upload_loc(){
 		let matchedRowIndex = -1;
 		if (navigator.geolocation) {
@@ -282,7 +285,10 @@
 			formData.append('Y',currentY);
 			formData.append('last_update',currentDateTime);	
 			formData.append('Date',formattedDate);	
-			formData.append('Time',time);	
+			formData.append('Time',time);		
+			formData.append('Quota',busCap);	
+			formData.append('Checked',busChecked);	
+			formData.append('Walkin',busWalkin);
 			
 			console.log('Date: ',dateF);
 
@@ -317,9 +323,7 @@
 				    
 			    	    // delete the old record
 				    // not used
-				    
-				    
-					function toDelete(){
+				    	function toDelete(){
 					    
 					      fetch(scriptURLdel, {
 						  method: 'POST',
@@ -650,7 +654,7 @@
 	// Update walkin count
 	async function updateGoogleSheetWalkinCount(walkincount) {
 		console.log("Going to update paxcount from ", walkincount)
-		
+		busWalkin = busWalkin + walkincount;
 	}
 	
 	// Update Pax count
@@ -694,6 +698,7 @@
 	
 	// Checkbox update sheet
 	async function updateGoogleSheet(item, value) {
+		busChecked = busChecked + item.paxcount;
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
 		console.log("Now update google sheet checkbox: ", value)
 		console.log(item)
