@@ -508,7 +508,11 @@
 		
 		    tableBody.appendChild(row);
 
-
+		    // When the user clicks the edit button, open the modal
+		    editButton.addEventListener("click", function() {
+		      modal.style.display = "block";
+		      document.getElementById("paxCountInput").value = item.paxcount;
+		    });
 
 			
 			  
@@ -525,11 +529,7 @@
 			    // Get the <span> element that closes the modal
 			    var span = document.getElementsByClassName("close")[0];
 			
-			    // When the user clicks the edit button, open the modal
-			    editButton.addEventListener("click", function() {
-			      modal.style.display = "block";
-			      document.getElementById("paxCountInput").value = item.paxcount;
-			    });
+			    
 			
 			    // When the user clicks the increment button, increase the pax count
 			    document.getElementById("incrementButton").addEventListener("click", function() {
