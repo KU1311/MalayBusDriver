@@ -129,7 +129,7 @@
 	      width: 100%;
 	      height: 100%;
 	      overflow: auto;
-	      background-color: rgba(0, 0, 0, 0.4);
+	      background-color: rgba(0, 0, 0, 0.7);
 	      justify-content: center;
 	      align-items: center;	
 	    }
@@ -213,9 +213,9 @@
 	    <div class="walkinModal-content">
 	      <h2>Add Walk-in pax</h2>
 	      <div class="pax-input-container">
-	        <button id="decrementButton">-</button>
+	        <button id="walkindecrementButton">-</button>
 	        <input type="number" id="walkinInput" value="1" min="0">
-	        <button id="incrementButton">+</button>
+	        <button id="walkinincrementButton">+</button>
 	      </div>
 	      <button id="walkinsubmitButton">Submit</button>
 	    </div>
@@ -610,6 +610,35 @@
 		      walkinmodal.style.display = "block";
 			    
 		    });	
+
+		// When the user clicks the increment button, increase the pax count
+			    document.getElementById("walkinincrementButton").addEventListener("click", function() {
+				    event.stopPropagation(); // Stop event propagation
+				    console.log("Increased from ", parseInt(document.getElementById("paxCountInput").value))
+			      document.getElementById("paxCountInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
+				    console.log("Increased to ",  document.getElementById("paxCountInput").value)
+			    });
+			
+			    // When the user clicks the decrement button, decrease the pax count
+			    document.getElementById("walkindecrementButton").addEventListener("click", function() {
+				    event.stopPropagation(); // Stop event propagation
+			      const currentValue = parseInt(document.getElementById("paxCountInput").value);
+				    console.log("Decreased from ", currentValue)
+			      if (currentValue > 0) {
+			        document.getElementById("paxCountInput").value = currentValue - 1;
+				      console.log("Decreased to ", document.getElementById("paxCountInput").value)
+			      }
+			    });
+			
+			    // When the user clicks the submit button, update the Google Sheet
+			    document.getElementById("walkinsubmitButton").addEventListener("click", function() {
+				const walkincount = document.getElementById("walkinInput").value;
+			       // Update the Google Sheet with the new walkin count
+			        updateGoogleSheetWalkinCount(walkincount);
+			      }
+			      modal.style.display = "none";
+			    });
+
 	
 		// When the user clicks anywhere outside of the modal, close it
 	    window.addEventListener("click", function(event) {
@@ -617,6 +646,12 @@
 		walkinmodal.style.display = "none";
 	      }
 	    });
+
+	// Update walkin count
+	async function updateGoogleSheetWalkinCount(walkincount) {
+		console.log("Going to update paxcount from ", walkincount)
+		
+	}
 	
 	// Update Pax count
 	async function updateGoogleSheetPaxCount(item, newPaxCount) {
