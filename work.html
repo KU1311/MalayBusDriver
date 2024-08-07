@@ -218,6 +218,7 @@
 	        <button id="walkinincrementButton">+</button>
 	      </div>
 	      <button id="walkinsubmitButton">Submit</button>
+		<button id="walkinCancel">Cancel</button>
 	    </div>
 	  </div>
 	  
@@ -229,7 +230,8 @@
 	        <input type="number" id="paxCountInput" min="0" step="1">
 	        <button id="incrementButton">+</button>
 	      </div>
-	      <button id="submitButton">Submit</button>
+	      <button id="submitButton">Check-in</button>
+		<button id="paxCountCancel">Cancel</button>
 	    </div>
 	  </div>
   </div> 
@@ -533,10 +535,11 @@
 		    paxCell.textContent = item.paxcount;
 		
 		    const editCell = document.createElement('td');
-		    const editButton = document.createElement('button');
-		    editButton.textContent = 'Edit';
-		    editCell.appendChild(editButton);
-		
+		  	if (checkBox.checked) {
+			    const editButton = document.createElement('button');
+			    editButton.textContent = 'Edit';
+			    editCell.appendChild(editButton);
+			}
 		    row.appendChild(checkCell);
 		    row.appendChild(numberCell);
 		    row.appendChild(paxCell);
@@ -584,7 +587,9 @@
 			      if (newPaxCount !== modal_item.paxcount) {
 			        // Update the Google Sheet with the new pax count
 			        updateGoogleSheetPaxCount(modal_item, newPaxCount);
-			        reloadWithoutCache();
+			        //reloadWithoutCache();
+			      	// check-in with new paxcount
+			      	
 			      }
 			      modal.style.display = "none";
 			    });
@@ -595,7 +600,9 @@
 			        modal.style.display = "none";
 			      }
 			    });
-			
+				document.getElementById("paxCountCancel").addEventListener("click", function() {
+					modal.style.display = "none";
+				})
 	
 	 		// Get the modal
 			    var modal = document.getElementById("myModal");
@@ -640,7 +647,7 @@
 				const walkincount = document.getElementById("walkinInput").value;
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
-			      	reloadWithoutCache();
+			      	//reloadWithoutCache();
 			      walkinmodal.style.display = "none";
 			    });
 
@@ -651,7 +658,11 @@
 		walkinmodal.style.display = "none";
 	      }
 	    });
+		document.getElementById("walkinCancel").addEventListener("click", function() {
+			modal.style.display = "none";
+		})
 
+	
 	// Update walkin count
 	async function updateGoogleSheetWalkinCount(walkincount) {
 		console.log("Going to update paxcount from ", walkincount)
@@ -675,7 +686,7 @@
 			formData.append('date', item.date);
 			formData.append('time', item.time);
 			formData.append('passengers', newPaxCount);
-			formData.append('check', item.checkedin);
+			formData.append('check', "checked");
 			formData.append('rowIndex', item.rowIndex)
 			console.log(formData)
 			console.log("Going to modify booking row ",item.rowIndex)
