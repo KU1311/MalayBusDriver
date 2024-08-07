@@ -615,7 +615,7 @@
 			    document.getElementById("walkinincrementButton").addEventListener("click", function() {
 				    event.stopPropagation(); // Stop event propagation
 				    console.log("Increased from ", parseInt(document.getElementById("walkinInput").value))
-			      document.getElementById("walkinInput").value = parseInt(document.getElementById("paxCountInput").value) + 1;
+			      document.getElementById("walkinInput").value = parseInt(document.getElementById("walkinInput").value) + 1;
 				    console.log("Increased to ",  document.getElementById("walkinInput").value)
 			    });
 			
