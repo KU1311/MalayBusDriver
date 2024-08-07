@@ -195,7 +195,20 @@
 	  </thead>
 	  <tbody id="tableBody"></tbody>
 	</table>
-
+	<div>
+		<button id = "addWalkinButton">ADD WALK-IN</button>
+	</div>
+	<div id="walkinModal" class="modal">
+	    <div class="walkinModal-content">
+	      <h2>No. of pax</h2>
+	      <div class="walkin-input-container">
+	        <button id="decrementButton">-</button>
+	        <input type="number" id="walkinInput" />
+	        <button id="incrementButton">+</button>
+	      </div>
+	      <button id="walkinsubmitButton">Submit</button>
+	    </div>
+	  </div>	
 	  <div id="myModal" class="modal">
 	    <div class="modal-content">
 	      <h2>No. of pax</h2>
@@ -578,6 +591,9 @@
 	}  // end of function displayFrequencyDetails
 	displayFrequencyDetails();
 
+	// Add Walkin button 
+	// Get the modal
+	    var walkin-modal = document.getElementById("walkinModal");
 			
 			
 	
