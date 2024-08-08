@@ -673,7 +673,7 @@
 	}
 	
 	// Update Pax count
-	async function updateGoogleSheetPaxCount(item, newPaxCount) {
+	function updateGoogleSheetPaxCount(item, newPaxCount) {
 	      // Update the Google Sheet with the new pax count
 	      console.log("Going to update paxcount from ", item.paxcount, " to ", newPaxCount)
 		console.log(item)
@@ -699,6 +699,7 @@
 				.then(response => {
 				  if (response.ok) {
 				    console.log('pax count updated');
+					location.reload(true);  
 				  } else {
 				    response.json().then(data => {
 				      console.error('Error updating data:', data.error);
@@ -740,6 +741,7 @@
 				.then(response => {
 				  if (response.ok) {
 				    console.log('Booking status updated');
+					location.reload(true);  
 				  } else {
 				    response.json().then(data => {
 				      console.error('Error updating data:', data.error);
