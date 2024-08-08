@@ -253,7 +253,6 @@
 
 	  <div id="loadingModal" class="modal">
 	    <div class="loadingModal-content">
-	      <h2>Add Walk-in pax</h2>
 	      <div class="loading-container">
 		      <h1>Loading...</h1>
 	      </div>
@@ -567,7 +566,7 @@
 
 				// When the user clicks the edit button, open the modal
 			    editButton.addEventListener("click", function() {
-			      loadingmodal.style.display = "block";
+			      modal.style.display = "block";
 			      document.getElementById("paxCountInput").value = item.paxcount;
 				modal_item = item;
 				    
@@ -634,7 +633,7 @@
 	
 	 		// Get the modal
 			    var modal = document.getElementById("myModal");
-				var loadingmodal = document.getElementById("loadingModal");
+				
 			    // Get the <span> element that closes the modal
 			    var span = document.getElementsByClassName("close")[0];
 
@@ -739,12 +738,12 @@
 		
 	    }
 	
-	
+	var loadingmodal = document.getElementById("loadingModal");
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
 		
-		var loadingmodal = document.getElementById("loadingModal");
 		loadingmodal.style.display = "block";
+		console.log("Loaded loadingmodal")
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
