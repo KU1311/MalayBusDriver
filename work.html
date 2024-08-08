@@ -567,7 +567,7 @@
 
 				// When the user clicks the edit button, open the modal
 			    editButton.addEventListener("click", function() {
-			      modal.style.display = "block";
+			      loadingmodal.style.display = "block";
 			      document.getElementById("paxCountInput").value = item.paxcount;
 				modal_item = item;
 				    
@@ -634,7 +634,7 @@
 	
 	 		// Get the modal
 			    var modal = document.getElementById("myModal");
-			
+				var loadingmodal = document.getElementById("loadingModal");
 			    // Get the <span> element that closes the modal
 			    var span = document.getElementsByClassName("close")[0];
 
