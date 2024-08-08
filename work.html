@@ -528,6 +528,7 @@
 			  console.log("listIndex: ",listIndex)
 			  console.log("item: ",item)
 			  
+			  var loadingmodal = document.getElementById("loadingModal");
 			  loadingmodal.style.display = "block";
 			  // Update the relevant record in the Google Sheet
 			  updateGoogleSheet(item, checkboxElement.checked);
