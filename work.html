@@ -768,7 +768,7 @@
 				.then(response => {
 				  if (response.ok) {
 				    console.log('Booking status updated');
-				    //location.reload(true);  
+				    location.reload(true);  
 				  } else {
 				    response.json().then(data => {
 				      console.error('Error updating data:', data.error);
