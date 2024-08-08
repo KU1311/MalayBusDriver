@@ -610,13 +610,14 @@
 			    // When the user clicks the submit button, update the Google Sheet
 			    document.getElementById("submitButton").addEventListener("click", function() {
 			      const newPaxCount = document.getElementById("paxCountInput").value;
-			      if (newPaxCount !== modal_item.paxcount) {
+				// to check if the edited count is same as original count
+			      //if (newPaxCount !== modal_item.paxcount) {
 			        // Update the Google Sheet with the new pax count
 			        updateGoogleSheetPaxCount(modal_item, newPaxCount);
 			        //reloadWithoutCache();
 			      	// check-in with new paxcount
 			      	
-			      }
+			      //}
 				 this.textContent = "Loading...";
 				    //modal.style.display = "none";
 			    });
