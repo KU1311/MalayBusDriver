@@ -171,6 +171,33 @@
 	      text-align: center;
 	      margin: 0 10px;
 	    }
+
+	    .loading-overlay {
+	      position: fixed;
+	      top: 0;
+	      left: 0;
+	      width: 100%;
+	      height: 100%;
+	      background-color: rgba(0, 0, 0, 0.5);
+	      display: flex;
+	      justify-content: center;
+	      align-items: center;
+	      z-index: 9999;
+	    }
+	
+	    .loading-overlay .spinner {
+	      border: 4px solid #f3f3f3;
+	      border-top: 4px solid #3498db;
+	      border-radius: 50%;
+	      width: 30px;
+	      height: 30px;
+	      animation: spin 2s linear infinite;
+	    }
+	
+	    @keyframes spin {
+	      0% { transform: rotate(0deg); }
+	      100% { transform: rotate(360deg); }
+	    }
   </style>
 </head>
 <body>
@@ -716,7 +743,7 @@
 	
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
-		createLoadingOverlay();
+		const overlay = showLoadingOverlay();
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
@@ -755,7 +782,7 @@
 				.catch(error => {
 				  console.error('Error:', error);
 				});
-		removeLoadingOverlay();			    
+		hideLoadingOverlay(overlay);		    
 	}
 
 
@@ -775,44 +802,32 @@
 	    });
 	  }
 
-	// Function to create the loading overlay
-	function createLoadingOverlay() {
-	  console.log("OVERLAY created")
-	  // Create a div for the loading overlay
-	  var overlay = document.createElement('div');
-	  overlay.id = 'loading-overlay';
-	  overlay.style.position = 'fixed';
-	  overlay.style.top = '0';
-	  overlay.style.left = '0';
-	  overlay.style.width = '100%';
-	  overlay.style.height = '100%';
-	  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-	  overlay.style.display = 'flex';
-	  overlay.style.justifyContent = 'center';
-	  overlay.style.alignItems = 'center';
-	  overlay.style.zIndex = '9999';
+	    // Function to create the loading overlay
+	    function createLoadingOverlay() {
+	      const overlay = document.createElement('div');
+	      overlay.classList.add('loading-overlay');
 	
-	  // Create a div for the "Loading..." text
-	  var loadingText = document.createElement('div');
-	  loadingText.textContent = 'Loading...';
-	  loadingText.style.color = 'white';
-	  loadingText.style.fontSize = '24px';
-	  loadingText.style.fontWeight = 'bold';
+	      const spinner = document.createElement('div');
+	      spinner.classList.add('spinner');
 	
-	  // Append the "Loading..." text to the overlay
-	  overlay.appendChild(loadingText);
+	      const loadingText = document.createElement('span');
+	      loadingText.textContent = 'Loading...';
 	
-	  // Add the overlay to the document
-	  document.body.appendChild(overlay);
-	}
+	      overlay.appendChild(spinner);
+	      overlay.appendChild(loadingText);
 	
-	// Function to remove the loading overlay
-	function removeLoadingOverlay() {
-	  var overlay = document.getElementById('loading-overlay');
-	  if (overlay) {
-	    document.body.removeChild(overlay);
-	  }
-	}
+	      return overlay;
+	    }
+	
+	    function showLoadingOverlay() {
+	      const overlay = createLoadingOverlay();
+	      document.body.appendChild(overlay);
+	      return overlay;
+	    }
+	
+	    function hideLoadingOverlay(overlay) {
+	      overlay.remove();
+	    }
   </script>
 
 </body>
