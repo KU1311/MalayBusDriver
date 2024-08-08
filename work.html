@@ -527,7 +527,6 @@
 			  const checkboxElement = event.target;
 			  console.log("listIndex: ",listIndex)
 			  console.log("item: ",item)
-			  showLoadingModal();
 			  // Update the relevant record in the Google Sheet
 			  updateGoogleSheet(item, checkboxElement.checked);
 		}
@@ -741,6 +740,7 @@
 	
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
+		showLoadingModal()
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
@@ -772,14 +772,14 @@
 				  } else {
 				    response.json().then(data => {
 				      console.error('Error updating data:', data.error);
-					    
+				      hideLoadingModal()    
 				    });
 				  }
 				})
 				.catch(error => {
 				  console.error('Error:', error);
+				  hideLoadingModal()
 				});
-   			hideLoadingModal()
 	}
 
 
