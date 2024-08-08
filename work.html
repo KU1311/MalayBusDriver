@@ -527,6 +527,8 @@
 			  const checkboxElement = event.target;
 			  console.log("listIndex: ",listIndex)
 			  console.log("item: ",item)
+			  
+			  loadingmodal.style.display = "block";
 			  // Update the relevant record in the Google Sheet
 			  updateGoogleSheet(item, checkboxElement.checked);
 		}
@@ -742,7 +744,6 @@
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
 		
-		loadingmodal.style.display = "block";
 		console.log("Loaded loadingmodal")
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
