@@ -593,7 +593,8 @@
 			      	// check-in with new paxcount
 			      	
 			      }
-			      modal.style.display = "none";
+				 this.textContent = "Loading...";
+				    //modal.style.display = "none";
 			    });
 			
 			    // When the user clicks anywhere outside of the modal, close it
@@ -650,7 +651,8 @@
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
 			      	//reloadWithoutCache();
-			      walkinmodal.style.display = "none";
+			      //walkinmodal.style.display = "none";
+				     this.textContent = "Loading...";
 			    });
 
 	
@@ -713,7 +715,7 @@
 	    }
 	
 	// Checkbox update sheet
-	async function updateGoogleSheet(item, value) {
+	function updateGoogleSheet(item, value) {
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
