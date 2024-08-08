@@ -471,7 +471,7 @@
 			      const paxcount = Number(matchedRowValues[headers.indexOf('passengers')]);
 			      const paxChecked = matchedRowValues[headers.indexOf('check')];
 			      console.log("pax found. count: ",paxcount)
-			      bookedPaxCount = bookedPaxCount + paxcount
+			      bookedPaxCount = parseInt(bookedPaxCount) + parseInt(paxcount)
 				console.log("Acc count: ",bookedPaxCount)
 				const paxname = matchedRowValues[headers.indexOf('username')];
 			    	const paxphone = matchedRowValues[headers.indexOf('phone')];
@@ -670,7 +670,7 @@
 	// Update walkin count
 	async function updateGoogleSheetWalkinCount(walkincount) {
 		console.log("Going to update paxcount from ", walkincount)
-		busWalkin = busWalkin + walkincount;
+		busWalkin = parseInt(busWalkin) + parseInt(walkincount);
 		console.log("acc busWalkin: ",busWalkin)
 	}
 	
@@ -777,6 +777,7 @@
 
 	// Function to create the loading overlay
 	function createLoadingOverlay() {
+	  console.log("OVERLAY created")
 	  // Create a div for the loading overlay
 	  var overlay = document.createElement('div');
 	  overlay.id = 'loading-overlay';
