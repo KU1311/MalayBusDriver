@@ -172,32 +172,21 @@
 	      margin: 0 10px;
 	    }
 
-	    .loading-overlay {
-	      position: fixed;
-	      top: 0;
-	      left: 0;
-	      width: 100%;
-	      height: 100%;
-	      background-color: rgba(0, 0, 0, 0.5);
+	    .loading-container {
 	      display: flex;
-	      justify-content: center;
 	      align-items: center;
-	      z-index: 9999;
+	      justify-content: center;
+	      margin-bottom: 20px;
+	    }
+
+	    .loadingModal-content {
+	      background-color: #fefefe;
+	      margin: 15% auto;
+	      padding: 20px;
+	      border: 1px solid #888;
+	      width: 30%;
 	    }
 	
-	    .loading-overlay .spinner {
-	      border: 4px solid #f3f3f3;
-	      border-top: 4px solid #3498db;
-	      border-radius: 50%;
-	      width: 30px;
-	      height: 30px;
-	      animation: spin 2s linear infinite;
-	    }
-	
-	    @keyframes spin {
-	      0% { transform: rotate(0deg); }
-	      100% { transform: rotate(360deg); }
-	    }
   </style>
 </head>
 <body>
@@ -259,6 +248,15 @@
 	      </div>
 	      <button id="submitButton">Check-in</button>
 		<button id="paxCountCancel">Cancel</button>
+	    </div>
+	  </div>
+
+	  <div id="loadingModal" class="modal">
+	    <div class="loadingModal-content">
+	      <h2>Add Walk-in pax</h2>
+	      <div class="loading-container">
+		      <h1>Loading...</h1>
+	      </div>
 	    </div>
 	  </div>
   </div> 
@@ -743,7 +741,8 @@
 	
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
-		const overlay = showLoadingOverlay();
+		var loadingmodal = document.getElementById("loadingModal");
+		loadingmodal.style.display = "block";
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
@@ -782,7 +781,7 @@
 				.catch(error => {
 				  console.error('Error:', error);
 				});
-		hideLoadingOverlay(overlay);		    
+		loadingmodal.style.display = "none";	    
 	}
 
 
