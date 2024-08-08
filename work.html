@@ -527,9 +527,7 @@
 			  const checkboxElement = event.target;
 			  console.log("listIndex: ",listIndex)
 			  console.log("item: ",item)
-			  
-			  var loadingmodal = document.getElementById("loadingModal");
-			  loadingmodal.style.display = "block";
+			  showLoadingModal();
 			  // Update the relevant record in the Google Sheet
 			  updateGoogleSheet(item, checkboxElement.checked);
 		}
@@ -741,11 +739,8 @@
 		
 	    }
 	
-	var loadingmodal = document.getElementById("loadingModal");
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
-		
-		console.log("Loaded loadingmodal")
 		busChecked = busChecked + item.paxcount;
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
@@ -784,7 +779,7 @@
 				.catch(error => {
 				  console.error('Error:', error);
 				});
-		loadingmodal.style.display = "none";	    
+   			hideLoadingModal()
 	}
 
 
@@ -831,6 +826,18 @@
 	    function hideLoadingOverlay(overlay) {
 	      overlay.remove();
 	    }
+
+	function showLoadingModal() {
+	  const loadingmodal = document.getElementById("loadingModal");
+	  console.log("~~~~~~ loading modal")
+	  loadingmodal.style.display = "block";
+	}
+	
+	function hideLoadingModal() {
+	  const loadingmodal = document.getElementById("loadingModal");
+	  console.log("loading modal closed")
+	  loadingmodal.style.display = "none";
+	}
   </script>
 
 </body>
