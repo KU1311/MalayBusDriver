@@ -627,6 +627,14 @@
 				  const paxCell = tableBody.rows[modal_item.listIndex].cells[2];
 				  paxCell.textContent = modal_item.paxcount;
 
+				// Update the checkbox state
+				  const checkBox = tableBody.rows[modal_item.listIndex].cells[0].querySelector('input[type="checkbox"]');
+				  checkBox.checked = true; // Set the checkbox to checked
+				    
+				// Remove the Edit button
+				  const editCell = tableBody.rows[modal_item.listIndex].cells[3];
+				  editCell.textContent = ''; // Remove the Edit button
+				    
 				    
 			    });
 			
