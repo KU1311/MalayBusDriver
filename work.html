@@ -619,7 +619,15 @@
 			      	
 			      //}
 				 this.textContent = "Loading...";
-				    //modal.style.display = "none";
+				    modal.style.display = "none";
+
+			// try to modify the numbers in the table
+				const paxCountInput = document.getElementById("paxCountInput");
+				  modal_item.paxcount = newPaxCount;
+				  const paxCell = tableBody.rows[modal_item.listIndex].cells[modal_item.listIndex];
+				  paxCell.textContent = modal_item.paxcount;
+
+				    
 			    });
 			
 			    // When the user clicks anywhere outside of the modal, close it
