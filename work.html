@@ -316,7 +316,8 @@
 			formData.append('Checked',busChecked);	
 			formData.append('Walkin',busWalkin);
 			
-			console.log('Date: ',dateF);
+			console.log('busChecked: ',busChecked);
+			console.log('busWalkin: ',busWalkin);
 
 			// ----- Check if have existing record
 				
@@ -688,8 +689,8 @@
 			       // Update the Google Sheet with the new walkin count
 			        updateGoogleSheetWalkinCount(walkincount);
 			      	//reloadWithoutCache();
-			      //walkinmodal.style.display = "none";
-				     this.textContent = "Loading...";
+			      	walkinmodal.style.display = "none";
+				//     this.textContent = "Loading...";
 			    });
 
 	
@@ -754,7 +755,9 @@
 	// Checkbox update sheet
 	function updateGoogleSheet(item, value) {
 //		showLoadingModal()
-		busChecked = busChecked + item.paxcount;
+		if (newCheckinValue === "checked") {
+			busChecked = busChecked + item.paxcount; }
+		else { busChecked = busChecked - item.paxcount; }
 		console.log("acc busChecked: ",busChecked)
 		const scriptURLBookingmod = 'https://script.google.com/macros/s/AKfycbxmXmiZewyV7tiw7sad9ngd2-EejP093OKvakodSJQyySaW7bQs1eGukt0Aea_w0BKAyg/exec';
 		console.log("Now update google sheet checkbox: ", value)
