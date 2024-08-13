@@ -228,6 +228,9 @@
 	<div id="walkinModal" class="modal">
 	    <div class="walkinModal-content">
 	      <h2>Add Walk-in pax</h2>
+		    <div>
+			    <h4>Current Walkin count: </h4><h4 id="walkedincount"></h4>
+		    </div>
 	      <div class="pax-input-container">
 	        <button id="walkindecrementButton">-</button>
 	        <input type="number" id="walkinInput" value="1" min="0" step="1">
@@ -668,7 +671,12 @@
 		      walkinmodal.style.display = "block";
 			    
 		    });	
-
+	
+		// update the counters
+		const walkedincountElement = document.getElementById("walkedincount");
+		walkedincountElement.textContent = busWalkin
+		availableSeatsElement.textContent = busCap - bookedPaxCount - busWalkin
+	
 		// When the user clicks the increment button, increase the pax count
 			    document.getElementById("walkinincrementButton").addEventListener("click", function() {
 				    event.stopPropagation(); // Stop event propagation
@@ -715,6 +723,7 @@
 		console.log("Going to update paxcount from ", walkincount)
 		busWalkin = parseInt(busWalkin) + parseInt(walkincount);
 		console.log("acc busWalkin: ",busWalkin)
+		availableSeatsElement.textContent = busCap - bookedPaxCount - busWalkin
 	}
 	
 	// Update Pax count
