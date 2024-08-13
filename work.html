@@ -672,41 +672,39 @@
 	    var walkinmodal = document.getElementById("walkinModal");
 		document.getElementById("addWalkinButton").addEventListener("click", function() {
 		      walkinmodal.style.display = "block";
-			    
-		    
-	
+
 		// update the counters
 		const walkedincountElement = document.getElementById("walkedincount");
 		walkedincountElement.textContent = busWalkin
+});	
+	// When the user clicks the increment button, increase the pax count
+	    document.getElementById("walkinincrementButton").addEventListener("click", function() {
+		    event.stopPropagation(); // Stop event propagation
+		    console.log("Increased from ", parseInt(document.getElementById("walkinInput").value))
+	      document.getElementById("walkinInput").value = parseInt(document.getElementById("walkinInput").value) + 1;
+		    console.log("Increased to ",  document.getElementById("walkinInput").value)
+	    });
 	
-		// When the user clicks the increment button, increase the pax count
-			    document.getElementById("walkinincrementButton").addEventListener("click", function() {
-				    event.stopPropagation(); // Stop event propagation
-				    console.log("Increased from ", parseInt(document.getElementById("walkinInput").value))
-			      document.getElementById("walkinInput").value = parseInt(document.getElementById("walkinInput").value) + 1;
-				    console.log("Increased to ",  document.getElementById("walkinInput").value)
-			    });
-			
-			    // When the user clicks the decrement button, decrease the pax count
-			    document.getElementById("walkindecrementButton").addEventListener("click", function() {
-				    event.stopPropagation(); // Stop event propagation
-			      const currentValue = parseInt(document.getElementById("walkinInput").value);
-				    console.log("Decreased from ", currentValue)
-			      if (currentValue > 0) {
-			        document.getElementById("walkinInput").value = currentValue - 1;
-				      console.log("Decreased to ", document.getElementById("walkinInput").value)
-			      }
-			    });
-			
-			    // When the user clicks the submit button, update the Google Sheet
-			    document.getElementById("walkinsubmitButton").addEventListener("click", function() {
-				const walkincount = document.getElementById("walkinInput").value;
-			       // Update the Google Sheet with the new walkin count
-			        updateGoogleSheetWalkinCount(walkincount);
-			      	//reloadWithoutCache();
-			      	walkinmodal.style.display = "none";
-				//     this.textContent = "Loading...";
-			    });
+	    // When the user clicks the decrement button, decrease the pax count
+	    document.getElementById("walkindecrementButton").addEventListener("click", function() {
+		    event.stopPropagation(); // Stop event propagation
+	      const currentValue = parseInt(document.getElementById("walkinInput").value);
+		    console.log("Decreased from ", currentValue)
+	      if (currentValue > 0) {
+		document.getElementById("walkinInput").value = currentValue - 1;
+		      console.log("Decreased to ", document.getElementById("walkinInput").value)
+	      }
+	    });
+	
+	    // When the user clicks the submit button, update the Google Sheet
+	    document.getElementById("walkinsubmitButton").addEventListener("click", function() {
+		const walkincount = document.getElementById("walkinInput").value;
+	       // Update the Google Sheet with the new walkin count
+		updateGoogleSheetWalkinCount(walkincount);
+		//reloadWithoutCache();
+		walkinmodal.style.display = "none";
+		//     this.textContent = "Loading...";
+	    });
 
 	
 		// When the user clicks anywhere outside of the modal, close it
@@ -718,7 +716,7 @@
 		document.getElementById("walkinCancel").addEventListener("click", function() {
 		  walkinmodal.style.display = "none";
 		})
-});	
+	
 	
 	// Update walkin count
 	async function updateGoogleSheetWalkinCount(walkincount) {
