@@ -301,6 +301,11 @@
 				minute: "2-digit",
 				second: "2-digit"
 			  });
+
+			// Calculate the total checked pax count
+			  const totalCheckedPaxCount = getTotalCheckedPaxCount();
+			  console.log('Total checked pax count:', totalCheckedPaxCount);
+				
 			const dateF = new Date(date);
 			const formattedDate = `${dateF.getFullYear()}/${(dateF.getMonth() + 1).toString().padStart(2, '0')}/${dateF.getDate().toString().padStart(2, '0')}`;
 			const formData = new FormData();
@@ -313,10 +318,10 @@
 			formData.append('Date',formattedDate);	
 			formData.append('Time',time);		
 			formData.append('Quota',busCap);	
-			formData.append('Checked',busChecked);	
+			formData.append('Checked',totalCheckedPaxCount);	
 			formData.append('Walkin',busWalkin);
 			
-			console.log('busChecked: ',busChecked);
+			console.log('busChecked: ',totalCheckedPaxCount);
 			console.log('busWalkin: ',busWalkin);
 
 			// ----- Check if have existing record
@@ -854,6 +859,25 @@
 	  console.log("loading modal closed")
 	  loadingmodal.style.display = "none";
 	}
+
+	function getTotalCheckedPaxCount() {
+	  let totalPaxCount = 0;
+	  const tableRows = tableBody.rows;
+	
+	  for (let i = 0; i < tableRows.length; i++) {
+	    const checkboxCell = tableRows[i].cells[0];
+	    const checkbox = checkboxCell.querySelector('input[type="checkbox"]');
+	    const paxCell = tableRows[i].cells[2];
+	    const paxCount = parseInt(paxCell.textContent);
+	
+	    if (checkbox.checked) {
+	      totalPaxCount += paxCount;
+	    }
+	  }
+	
+	  return totalPaxCount;
+	}
+	
   </script>
 
 </body>
