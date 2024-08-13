@@ -624,7 +624,7 @@
 			// try to modify the numbers in the table
 				const paxCountInput = document.getElementById("paxCountInput");
 				  modal_item.paxcount = newPaxCount;
-				  const paxCell = tableBody.rows[modal_item.listIndex].cells[modal_item.listIndex];
+				  const paxCell = tableBody.rows[modal_item.listIndex].cells[2];
 				  paxCell.textContent = modal_item.paxcount;
 
 				    
@@ -734,7 +734,7 @@
 				.then(response => {
 				  if (response.ok) {
 				    console.log('pax count updated');
-					location.reload(true);  
+//					location.reload(true);  
 				  } else {
 				    response.json().then(data => {
 				      console.error('Error updating data:', data.error);
