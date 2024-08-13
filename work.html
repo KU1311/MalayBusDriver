@@ -725,7 +725,7 @@
 		console.log("Going to update paxcount from ", walkincount)
 		busWalkin = parseInt(busWalkin) + parseInt(walkincount);
 		console.log("acc busWalkin: ",busWalkin)
-		availableSeatsElement.textContent = busCap - bookedPaxCount - busWalkin
+		availableSeatsElement.textContent = availableSeatsElement.textContent - busWalkin
 		bookedSeatsElement.textContent = bookedPaxCount	  
 	}
 	
