@@ -198,7 +198,7 @@
 	  </div>
 	</div>
 	<div>
-	<h3 id="atStopText"></h3>
+	<h2 id="atStopText"></h2>
 	<button id = "NextStopButton">Next Stop</button> 
 	</div>
 	<table class="countTB">
@@ -329,7 +329,7 @@
 	function NextStop(i){
 		const atStop = stopLocations[i].name;
 		nowAtStop = atStop;
-   		 document.getElementById('atStopText').textContent = `Now at/going to: ${atStop}`;
+   		 document.getElementById('atStopText').textContent = `Now at/going to stop: ${atStop}`;
 	}
 	let i = 0;
 	NextStop(i);
