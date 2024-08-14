@@ -280,9 +280,10 @@
 
 </script>	
 <script type="module">
-async function displayAtStop() {
 	// get stops of the route
 	import { getRoutes } from './routes.js';
+	
+async function displayAtStop() {
 	    const routes = await getRoutes();
 	
 	    let DepartureTimes = [];
