@@ -1,4 +1,4 @@
- 
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -197,6 +197,11 @@
 		  <br>
 	  </div>
 	</div>
+	<div>
+	<h3>Now at/going to: </h3>
+	<h1 id="atStopText"></h1>
+	<button id = "NextStopButton">Next Stop</button> 
+	</div>
 	<table class="countTB">
 	  <tr>
 	    <th class = "countTBcell">Booked</th>
@@ -260,7 +265,6 @@
 	    </div>
 	  </div>
   </div> 
-
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
