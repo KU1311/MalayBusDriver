@@ -327,23 +327,6 @@
 	        }
 	    }
 	let nowAtStop;
-	function NextStop(i){
-		const atStop = stopLocations[i].name;
-		nowAtStop = atStop;
-   		 document.getElementById('atStopText').textContent = `${atStop}`;
-	}
-	let i = 0;
-	NextStop(i);
-	const nextStopButton = document.getElementById('NextStopButton');
-	nextStopButton.addEventListener("click", function() {
-	    try{
-		i = i+1;
-		NextStop(i);
-		console.log("nowAtStop", nowAtStop)
-	    } catch (error) {
-		console.log("end of route")
-	    }
-	})
 	
 	let intervalId;
 	let busChecked = 0;
