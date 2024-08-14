@@ -339,6 +339,7 @@
 	    try{
 		i = i+1;
 		NextStop(i);
+		console.log("nowAtStop", nowAtStop)
 	    } catch (error) {
 		console.log("end of route")
 	    }
@@ -350,6 +351,7 @@
     // Check if the browser supports the Geolocation API
 	// Upload live location to driver_location
 	function upload_loc(){
+		console.log("nowAtStop_loc", nowAtStop)
 		let matchedRowIndex = -1;
 		if (navigator.geolocation) {
 		  navigator.geolocation.getCurrentPosition(
