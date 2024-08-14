@@ -524,7 +524,9 @@ async function displayAtStop() {
 	      const bookedSeatsElement = document.getElementById('bookedSeats');
 	      const availableSeatsElement = document.getElementById('availableSeats');
 
-	async function displayFrequencyDetails() {	
+	async function displayFrequencyDetails() {
+		
+	    const routes = await getRoutes();
 	      const timeff = document.getElementById('timef');
 	      const stopff = document.getElementById('stopf');
 	      const idff = document.getElementById('idf');
