@@ -280,7 +280,7 @@
 
 </script>	
 <script type="module">
-
+async function displayAtStop() {
 	// get stops of the route
 	import { getRoutes } from './routes.js';
 	    const routes = await getRoutes();
@@ -325,7 +325,29 @@
 	          });
 	        }
 	    }
+
 	
+	function NextStop(i){
+		const atStop = stopLocations[i].name;
+		nowAtStop = atStop;
+   		 document.getElementById('atStopText').textContent = `${atStop}`;
+	}
+	let i = 0;
+	NextStop(i);
+	const nextStopButton = document.getElementById('NextStopButton');
+	nextStopButton.addEventListener("click", function() {
+	    try{
+		i = i+1;
+		NextStop(i);
+		console.log("nowAtStop", nowAtStop)
+	    } catch (error) {
+		console.log("end of route")
+	    }
+	})
+}
+	
+	let nowAtStop;
+	displayAtStop();
 	let intervalId;
 	let busChecked = 0;
 	let busWalkin = 0;
