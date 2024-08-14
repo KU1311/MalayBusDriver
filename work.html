@@ -198,7 +198,7 @@
 	  </div>
 	</div>
 	<div>
-	<p id="atStopText"></p>
+	<h4 id="atStopText"></h4>
 	<button id = "NextStopButton">Next Stop</button> 
 	</div>
 	<table class="countTB">
@@ -325,17 +325,22 @@
 	          });
 	        }
 	    }
-
+	let nowAtStop;
 	function NextStop(i){
-		const atStop = stopLocations[i].name
+		const atStop = stopLocations[i].name;
+		nowAtStop = atStop;
    		 document.getElementById('atStopText').textContent = `Now at/going to: ${atStop}`;
 	}
 	let i = 0;
 	NextStop(i);
 	const nextStopButton = document.getElementById('NextStopButton');
 	nextStopButton.addEventListener("click", function() {
+	    try{
 		i = i+1;
 		NextStop(i);
+	    } catch (error) {
+		console.log("end of route")
+	    }
 	})
 	
 	let intervalId;
@@ -383,6 +388,7 @@
 			formData.append('Quota',busCap);	
 			formData.append('Checked',totalCheckedPaxCount);	
 			formData.append('Walkin',busWalkin);
+			formData.append('At_Stop',nowAtStop);
 			
 			console.log('busChecked: ',totalCheckedPaxCount);
 			console.log('busWalkin: ',busWalkin);
