@@ -282,7 +282,7 @@
 <script type="module">
 	// get stops of the route
 	import { getRoutes } from './routes.js';
-	
+let nowAtStop;	
 async function displayAtStop() {
 	    const routes = await getRoutes();
 	
@@ -347,7 +347,7 @@ async function displayAtStop() {
 	})
 }
 	
-	let nowAtStop;
+	
 	displayAtStop();
 	let intervalId;
 	let busChecked = 0;
