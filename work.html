@@ -512,7 +512,8 @@ async function displayAtStop() {
 	  }
 	} // end of upload_loc function
 	
-	upload_loc();
+	//upload_loc();
+	setTimeout(upload_loc, 10000);
 	// Start the interval immediately when the page loads
 	window.addEventListener('load', function() {
 	  intervalId = setInterval(upload_loc, 60000); // 60000 milliseconds = 1 minute
