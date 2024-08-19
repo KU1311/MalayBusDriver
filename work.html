@@ -707,8 +707,6 @@ async function displayAtStop() {
 
 				    
 			      //}
-				    modal.style.display = "none";
-				submitButton.textContent = "Check-in";
 
 			// try to modify the numbers in the table
 				const paxCountInput = document.getElementById("paxCountInput");
@@ -836,6 +834,9 @@ async function displayAtStop() {
 				      console.error('Error updating data:', data.error);
 				    });
 				  }
+					
+				    modal.style.display = "none";
+				    submitButton.textContent = "Check-in";
 				})
 				.catch(error => {
 				  console.error('Error:', error);
