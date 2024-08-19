@@ -691,6 +691,7 @@ async function displayAtStop() {
 			
 			    // When the user clicks the submit button, update the Google Sheet
 			    document.getElementById("submitButton").addEventListener("click", function() {
+				submitButton.textContent = "Loading...";
 			      const newPaxCount = document.getElementById("paxCountInput").value;
 				// to check if the edited count is same as original count
 			      //if (newPaxCount !== modal_item.paxcount) {
@@ -706,8 +707,8 @@ async function displayAtStop() {
 
 				    
 			      //}
-				 this.textContent = "Loading...";
 				    modal.style.display = "none";
+				submitButton.textContent = "Check-in";
 
 			// try to modify the numbers in the table
 				const paxCountInput = document.getElementById("paxCountInput");
