@@ -417,14 +417,7 @@ async function displayAtStop() {
 				
 			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
 			console.log("lookup check")
-			fetch(proxyUrl + sheetUrl, {
-			  method: 'GET',
-			  headers: {
-			    'Cache-Control': 'no-cache, no-store, must-revalidate', // Disable caching
-			    'Pragma': 'no-cache', // HTTP 1.0 backward compatibility
-			    'Expires': '0' // Prevent caching
-			  }
-			})
+			fetch(sheetUrl)
 			  .then(response => response.text())
 			  .then(data => {
 			    console.log("lookup responsed")
@@ -579,14 +572,7 @@ async function displayAtStop() {
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
 		console.log("bookings lookup check")
-		fetch(proxyUrl + OrdersheetUrl, {
-		  method: 'GET',
-		  headers: {
-		    'Cache-Control': 'no-cache, no-store, must-revalidate', // Disable caching
-		    'Pragma': 'no-cache', // HTTP 1.0 backward compatibility
-		    'Expires': '0' // Prevent caching
-		  }
-		})
+		fetch(OrdersheetUrl)
 		  .then(response => response.text())
 		  .then(data => {
 		    console.log("lookup responsed")
