@@ -279,6 +279,7 @@
 	  </div>
   </div> 
 <script>
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
     const busID = urlParams.get('busID');
@@ -416,7 +417,7 @@ async function displayAtStop() {
 				
 			const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT51YqqiM3MQNbqvF2h86hucxl0kU-wrzctUqTJkDJirHZqVQM3dFeiNlMQkLYxSfMyha3tWbN37uvF/pub?output=csv';
 			console.log("lookup check")
-			fetch(sheetUrl, {
+			fetch(proxyUrl + sheetUrl, {
 			  method: 'GET',
 			  headers: {
 			    'Cache-Control': 'no-cache, no-store, must-revalidate', // Disable caching
