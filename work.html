@@ -572,10 +572,13 @@ async function displayAtStop() {
 	      });
 
 		// get count from bookings
-		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv' + Date.now();
+		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
 		console.log("bookings lookup check")
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', OrdersheetUrl, true);
+		xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+		xhr.setRequestHeader('Pragma', 'no-cache');
+		xhr.setRequestHeader('Expires', '0');
 		xhr.onload = function() {
 		  if (xhr.status === 200) {
 		    const data = xhr.responseText;
