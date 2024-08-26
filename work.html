@@ -573,13 +573,9 @@ async function displayAtStop() {
 
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
+		const SheetsuUrl = 'https://sheetsu.com/apis/v1.0su/022b004d368f';
 		console.log("bookings lookup check")
-		fetch(OrdersheetUrl, {
-			headers: {
-		    'Cache-Control': 'no-cache, no-store, must-revalidate',
-		    'Expires': '0'
-		  }
-		})
+		fetch(SheetsuUrl)
 		  .then(response => response.text())
 		  .then(data => {
 		    console.log("lookup responsed")
