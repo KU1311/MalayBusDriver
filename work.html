@@ -576,9 +576,7 @@ async function displayAtStop() {
 		console.log("bookings lookup check")
 		const xhr = new XMLHttpRequest();
 		xhr.open('GET', OrdersheetUrl, true);
-		xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-		xhr.setRequestHeader('Pragma', 'no-cache');
-		xhr.setRequestHeader('Expires', '0');
+		
 		xhr.onload = function() {
 		  if (xhr.status === 200) {
 		    const data = xhr.responseText;
