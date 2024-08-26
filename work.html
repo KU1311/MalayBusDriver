@@ -574,6 +574,23 @@ async function displayAtStop() {
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
 		console.log("bookings lookup check")
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', OrdersheetUrl, true);
+		xhr.onload = function() {
+		  if (xhr.status === 200) {
+		    const data = xhr.responseText;
+		  console.log("XHR")
+		    // Process the data as before
+		  } else {
+		    console.error('Error fetching booking data:', xhr.statusText);
+		  }
+		};
+		xhr.onerror = function() {
+		  console.error('Network error occurred.');
+		};
+		xhr.send();
+		console.log("bookings lookup check 2")
+		
 		fetch(OrdersheetUrl)
 		  .then(response => response.text())
 		  .then(data => {
