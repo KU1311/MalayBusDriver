@@ -583,9 +583,13 @@ async function displayAtStop() {
 		// ~~~~~~~~~~~~~~~~~~~~~~ ORDER ~~~~~~~~~~~~~~~~~~~~~~
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
-		fetch(OrdersheetUrl, {
-		      responseType: 'blob' // Set the response type to Blob
-		    })
+		// Add a cache-busting parameter to the URL
+			const url = new URL(sheetUrl);
+			url.searchParams.set('_t', Date.now());
+			
+			fetch(url.toString(), {
+			  responseType: 'blob'
+			})
 		    .then(response => response.blob()) // Convert the response to a Blob
 		    .then(blob => {
 			    // Create a download link for the CSV file
