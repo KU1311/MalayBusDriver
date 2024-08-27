@@ -596,6 +596,9 @@ async function displayAtStop() {
 			      document.body.appendChild(link);
 			      link.click();
 			      document.body.removeChild(link);
+			    return blob.text(); // Convert the Blob to text
+			})
+		     .then(data => {
 		     console.log("lookup responsed")
 		    // Parse the CSV data
 		    const rows = data.trim().split('\n');
