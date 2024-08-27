@@ -584,7 +584,7 @@ async function displayAtStop() {
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
 		// Add a cache-busting parameter to the URL
-			const url = new URL(sheetUrl);
+			const url = new URL(OrdersheetUrl);
 			url.searchParams.set('_t', Date.now());
 			
 			fetch(url.toString(), {
