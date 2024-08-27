@@ -5,6 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Working</title>
+  <script>
+    // Function to set the no-cache headers
+    function setNoCacheHeaders() {
+      var currentTime = new Date().getTime();
+      var expirationTime = currentTime - 1; // Set expiration time to a time in the past
+
+      // Set the no-cache headers
+      document.cookie = "Cache-Control=no-cache, no-store, must-revalidate; Pragma=no-cache; Expires=" + new Date(expirationTime).toUTCString() + ";";
+    }
+ </script>
   <style>
     body {
       font-family: Arial, sans-serif;
