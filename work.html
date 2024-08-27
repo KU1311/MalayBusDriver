@@ -580,19 +580,22 @@ async function displayAtStop() {
 		  console.log("Quota: ",matchedQuota)
 	        }
 	      });
-
+		// ~~~~~~~~~~~~~~~~~~~~~~ ORDER ~~~~~~~~~~~~~~~~~~~~~~
 		// get count from bookings
 		const OrdersheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTxjHHSDdcYUEZMbCzUF_yov6p3Ur1nEdkGbMtaNrco6O8dQG5WLtM7YxloG8rbsZH--9J75SJWyrzR/pub?output=csv';
-		console.log("bookings lookup check")
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', OrdersheetUrl, true);
-		
-		xhr.onload = function() {
-		  if (xhr.status === 200) {
-		    const data = xhr.responseText;
-		  
-		    // Process the data as before
-
+		fetch(OrdersheetUrl, {
+		      responseType: 'blob' // Set the response type to Blob
+		    })
+		    .then(response => response.blob()) // Convert the response to a Blob
+		    .then(blob => {
+			    // Create a download link for the CSV file
+			      const url = URL.createObjectURL(blob);
+			      const link = document.createElement('a');
+			      link.href = url;
+			      link.setAttribute('download', 'file.csv');
+			      document.body.appendChild(link);
+			      link.click();
+			      document.body.removeChild(link);
 		     console.log("lookup responsed")
 		    // Parse the CSV data
 		    const rows = data.trim().split('\n');
@@ -704,14 +707,7 @@ async function displayAtStop() {
 		  
 		  
 		  
-		  } else {
-		    console.error('Error fetching booking data:', xhr.statusText);
-		  }
 		};
-		xhr.onerror = function() {
-		  console.error('Network error occurred.');
-		};
-		xhr.send();
 		
 			// Edit button pop-ups
 			 
